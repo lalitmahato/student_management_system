@@ -9,6 +9,7 @@ init-hook='import sys, os; sys.path.append(os.getcwd()); os.environ.setdefault("
 [MESSAGES CONTROL]
 # Disable selected warnings
 disable=
+    import-outside-toplevel,
     missing-module-docstring,
     missing-class-docstring,
     missing-function-docstring,
