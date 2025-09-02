@@ -1,0 +1,184 @@
+@import url('../base.css');
+
+.div-body {
+    margin: 0;
+    background: var(--secondary-text-color);
+    font-size: 1rem;
+}
+
+.title-nav {
+    font-size: 1.3em;
+}
+
+.dashboard-nav {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+}
+
+.dashboard-nav__info {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    flex: 1 1 auto;
+}
+
+.profile-hover {
+    right: 1rem;
+    top: 6rem;
+    width: 100%;
+    max-width: 90vw;
+}
+
+
+/* Dashboard Navbar */
+.dashboard-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.6rem;
+    background: var(--secondary-text-color);
+}
+
+.title-nav {
+    font-size: 1.6em;
+    font-weight: 600;
+    color: var(--primary-text-color);
+    flex: 1 1 auto;
+}
+
+
+.dashboard-nav__info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.dashboard-nav__name {
+    color: var(--primary-text-color);
+    font-weight: 500;
+    font-size: 1em;
+}
+
+.nav-profile {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    cursor: pointer;
+}
+
+.dashboard-nav__img {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.dashboard-nav__img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.dropdown-arrow i {
+    color: var(--primary-text-color);
+    font-size: 0.75rem;
+}
+
+.profile-hover {
+    display: none;
+    position: absolute;
+    right: 1.6rem;
+    top: 4.5rem;
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    background: var(--secondary-text-color);
+    z-index: 999;
+    width: 280px;
+}
+
+.profile-hover__detail,
+.profile-hover__links {
+    padding: 1rem;
+}
+
+.profile-hover__img {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    margin: 0 auto;
+}
+
+.profile-hover__img img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-hover__name {
+    text-align: center;
+    font-size: 1.1em;
+    font-weight: 500;
+    margin-top: 1vh;
+}
+
+.profile-hover__email {
+    text-align: center;
+    color: var(--primary-text-color);
+    font-size: 0.9em;
+    word-break: break-word;
+}
+
+.profile-hover__links a {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--primary-text-color);
+    text-decoration: none;
+    font-size: 1em;
+    margin-bottom: 0.7rem;
+}
+
+.profile-hover__links a:hover {
+    color: var(--primary-btn-color);
+    font-weight: 500;
+}
+
+.profile-hover-hr {
+    margin: 0;
+    border: none;
+    border-top: 1px solid #eee;
+}
+
+@media (max-width: 992px) {
+    body {
+        font-size: 0.9rem;
+    }
+
+    .title-nav {
+        font-size: 1.3em;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        font-size: 0.9rem;
+    }
+
+}
+
+@media (max-width: 576px) {
+    body {
+        font-size: 0.8rem;
+    }
+
+    .title-nav {
+        display: none;
+    }
+}

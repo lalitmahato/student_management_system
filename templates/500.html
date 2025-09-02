@@ -1,0 +1,16 @@
+{% extends 'base_auth.html' %}
+{% load i18n %}
+{% load static %}
+{% block header %}
+    <link rel="stylesheet" href="{% static 'css/components/500-error.css' %}">
+{% endblock header %}
+{% block content %}
+    <div class="d-flex align-items-center justify-content-center vh-100 bg-light">
+        <div class="text-center p-4">
+            <img src="{% static 'images/500.svg' %}" alt="500 Error" class="img-fluid mb-4 error-img">
+            <h1 class="text-danger error-heading">{% trans "Internal Server Error" %}</h1>
+            <p class="lead error-text">{% trans "Oops! Something went wrong on our side." %}</p>
+{#            <a href="{% url 'user:user_dashboard' %}" class="btn back-to-home">{% trans "Go to Homepage" %}</a>#}
+        </div>
+    </div>
+{% endblock content %}

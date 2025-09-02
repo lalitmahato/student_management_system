@@ -3,7 +3,7 @@
 This is a student management system built using Django and Docker.
 
 ## ERD Diagram
-The ERD diagram for the student management system is available at the following URL: [https://lucid.app/lucidchart/fb80dfd6-628b-4305-8fd3-677c2dbc7dda/edit?viewport_loc=-715%2C121%2C2217%2C1095%2C0_0&invitationId=inv_4928a608-8e4c-4b95-b7c0-18a5a67223df](https://lucid.app/lucidchart/fb80dfd6-628b-4305-8fd3-677c2dbc7dda/edit?viewport_loc=-715%2C121%2C2217%2C1095%2C0_0&invitationId=inv_4928a608-8e4c-4b95-b7c0-18a5a67223df)
+The ERD diagram for the student management system is available at the following URL: [lucid.app](https://lucid.app/lucidchart/fb80dfd6-628b-4305-8fd3-677c2dbc7dda/edit?viewport_loc=-715%2C121%2C2217%2C1095%2C0_0&invitationId=inv_4928a608-8e4c-4b95-b7c0-18a5a67223df)
 
 ## Setup Process
 ### Create ```.env``` file and add the following environment variables:
@@ -11,14 +11,13 @@ The ERD diagram for the student management system is available at the following 
 SECRET_KEY=secret_key
 DEBUG=True
 ALLOWED_HOSTS=localhost,127.0.0.1
-CSRF_TRUSTED_ORIGINS=http://localhost:5010
-ALLOWED_ORIGINS=http://localhost:5010
-#SWAGGER_URL=http://localhost:5010/
+CSRF_TRUSTED_ORIGINS=http://localhost:8003
+ALLOWED_ORIGINS=http://localhost:8003
 
 # Database Config
 DB_ENGINE=django.db.backends.postgresql
-DB_NAME=forest_project
-DB_USER=forest_project
+DB_NAME=student_management_system
+DB_USER=student_management_system
 DB_PASSWORD=db_password
 DB_HOST=db
 DB_PORT=5432

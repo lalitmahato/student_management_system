@@ -1,0 +1,68 @@
+@import url('../base.css');
+.error-img {
+  max-width: 400px;
+  height: auto;
+}
+
+.error-heading {
+  font-size: 3rem;
+}
+
+.error-text {
+  font-size: 1.25rem;
+}
+.back-to-home{
+  background-color: var(--primary-btn-color);
+  color: white;
+  transition: all 0.3s ease;
+}
+.back-to-home:hover{
+  background-color: var(--hover-btn-color);
+  color: white;
+  box-shadow: 0 10px 20px rgba(52, 152, 219, 0.3);
+}
+
+@media (max-width: 992px) {
+  .error-img {
+    max-width: 350px;
+  }
+  .error-heading {
+    font-size: 2.5rem;
+  }
+  .error-text {
+    font-size: 1.125rem;
+  }
+  .back-to-home{
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .error-img {
+    max-width: 300px;
+  }
+  .error-heading {
+    font-size: 2rem;
+  }
+  .error-text {
+    font-size: 1rem;
+  }
+  .back-to-home{
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .error-img {
+    max-width: 250px;
+  }
+  .error-heading {
+    font-size: 1.75rem;
+  }
+  .error-text {
+    font-size: 0.95rem;
+  }
+  .back-to-home{
+    font-size: 0.8rem;
+  }
+}
