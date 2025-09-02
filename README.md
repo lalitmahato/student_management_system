@@ -1,4 +1,9 @@
-# Forest Project 
+# Student Management System
+
+This is a student management system built using Django and Docker.
+
+## ERD Diagram
+The ERD diagram for the student management system is available at the following URL: [https://lucid.app/lucidchart/fb80dfd6-628b-4305-8fd3-677c2dbc7dda/edit?viewport_loc=-715%2C121%2C2217%2C1095%2C0_0&invitationId=inv_4928a608-8e4c-4b95-b7c0-18a5a67223df](https://lucid.app/lucidchart/fb80dfd6-628b-4305-8fd3-677c2dbc7dda/edit?viewport_loc=-715%2C121%2C2217%2C1095%2C0_0&invitationId=inv_4928a608-8e4c-4b95-b7c0-18a5a67223df)
 
 ## Setup Process
 ### Create ```.env``` file and add the following environment variables:
