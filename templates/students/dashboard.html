@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+
+
+{% block header %}
+    <link rel="stylesheet" href="{% static 'css/students/dashboard-component.css' %}">
+{% endblock header %}
+
+{% block content %}
+    {% trans "Dashboard" as translated_title %}
+    {% with page_title=translated_title %}
+        {% include 'components/nav.html' %}
+    {% endwith %}
+    {% include 'students/dashboard_component.html' %}
+{% endblock content %}
