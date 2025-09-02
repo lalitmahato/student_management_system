@@ -1,0 +1,126 @@
+{% load i18n %}
+{% load static %}
+<div class="div-dashboard">
+
+    <div class="card-heading">
+        {% trans "Today's Summary" %}
+    </div>
+    <div class="detail-boxes">
+
+
+        <div class="detail-boxes__box alert alert-success" role="alert">
+            <div class="three-dot">
+                <i class='bx bx-dots-vertical-rounded'></i>
+            </div>
+            <div class="box-icon">
+                <i class='bx bx-receipt'></i>
+            </div>
+            <p class="total-no">5</p>
+            <p class="box__text"><span>{% trans "Transaction" %}</span>&nbsp{% trans "Total Number of Today's" %} </p>
+        </div>
+
+        <div class="detail-boxes__box alert alert-success" role="alert">
+            <div class="three-dot">
+                <i class='bx bx-dots-vertical-rounded'></i>
+            </div>
+            <div class="box-icon">
+                <i class='bx bx-line-chart'></i>
+            </div>
+            <p class="total-no">5</p>
+            <p class="box__text"><span>{% trans "Transaction Volume" %}</span>&nbsp{% trans "Total Number of Today's" %}
+            </p>
+        </div>
+    </div>
+
+    <div class="card-heading1">
+        {% trans "Fiscal Year Summary" %}
+    </div>
+    <div class="detail-boxes" role="alert">
+        <div class="detail-boxes__box alert alert-warning">
+            <div class="three-dot">
+                <i class='bx bx-dots-vertical-rounded'></i>
+
+            </div>
+            <div class="box-icon">
+                <i class='bx bx-calendar-alt'></i>
+            </div>
+            <p class="total-no">5</p>
+            <p class="box__text"><span>{% trans "Fiscal year Transaction" %}</span>&nbsp{% trans "Total Number of" %}
+            </p>
+        </div>
+
+        <div class="detail-boxes__box alert alert-warning" role="alert">
+            <div class="three-dot">
+                <i class='bx bx-dots-vertical-rounded'></i>
+            </div>
+            <div class="box-icon">
+                <i class='bx bx-trending-up'></i>
+            </div>
+            <p class="total-no">5</p>
+            <p class="box__text">
+                <span>{% trans "Fiscal year Transaction Volume" %}&nbsp</span>{% trans "Total Number of" %} </p>
+        </div>
+
+        <div class="detail-boxes__box alert alert-warning" role="alert">
+            <div class="three-dot">
+                <i class='bx bx-dots-vertical-rounded'></i>
+            </div>
+            <div class="box-icon">
+                <i class='bx bx-clipboard'></i>
+            </div>
+            <p class="total-no">5</p>
+            <p class="box__text"><span>{% trans "Annual Work Plan" %}</span>&nbsp{% trans "Total Number of" %} </p>
+        </div>
+
+        <div class="detail-boxes__box alert alert-warning" role="alert">
+            <div class="three-dot">
+                <i class='bx bx-dots-vertical-rounded'></i>
+            </div>
+            <div class="box-icon">
+                <i class='bx bx-check-circle'></i>
+            </div>
+            <p class="total-no">5</p>
+            <p class="box__text"><span>{% trans "Completed Work Plan" %}</span>&nbsp{% trans "Total Number of" %} </p>
+        </div>
+
+    </div>
+
+    <div class="card-heading2">
+        {% trans "Other Information" %}
+    </div>
+    <div class="detail-boxes ">
+        <div class="detail-boxes__box alert alert-primary" role="alert">
+            <div class="three-dot">
+                <i class='bx bx-dots-vertical-rounded'></i>
+            </div>
+            <div class="box-icon">
+                <i class='bx bxl-postgresql'></i>
+            </div>
+            <p class="total-no">5</p>
+            <p class="box__text"><span>{% trans "Elephant Registration" %}</span>&nbsp{% trans "Total Number of " %}
+            </p>
+        </div>
+
+        <div class="detail-boxes__box alert alert-primary" role="alert">
+            <div class="three-dot">
+                <i class='bx bx-dots-vertical-rounded'></i>
+            </div>
+            <div class="box-icon">
+                <i class='bx bx-car'></i>
+            </div>
+            <p class="total-no">5</p>
+            <p class="box__text"><span>{% trans "Vehicle Registration" %}</span>&nbsp{% trans "Total Number of " %} </p>
+        </div>
+
+        <div class="detail-boxes__box alert alert-primary" role="alert">
+            <div class="three-dot">
+                <i class='bx bx-dots-vertical-rounded'></i>
+            </div>
+            <div class="box-icon">
+                <i class='bx bx-group'></i>
+            </div>
+            <p class="total-no">5</p>
+            <p class="box__text"><span>{% trans "Visitor Count" %}</span>&nbsp{% trans "Total Number of" %} </p>
+        </div>
+    </div>
+</div>
