@@ -1,0 +1,16 @@
+{% extends 'base_auth.html' %}
+{% load i18n %}
+{% load static %}
+{% block header %}
+    <link rel="stylesheet" href="{% static 'css/components/404-error.css' %}">
+{% endblock header %}
+{% block content %}
+    <div class="d-flex align-items-center justify-content-center vh-100 bg-light">
+        <div class="text-center p-4">
+            <img src="{% static 'images/404.svg' %}" alt="404 Not Found" class="img-fluid mb-4 error-img">
+            <h1 class="text-danger error-heading">{% trans 'Page Not Found' %}</h1>
+            <p class="lead error-text">{% trans "Sorry, the page you're looking for doesn't exist or has been moved." %}</p>
+{#            <a href="{% url 'user:user_dashboard' %}" class="btn back-to-home">{% trans "Go to Homepage" %}</a>#}
+        </div>
+    </div>
+{% endblock content %}

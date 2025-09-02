@@ -1,0 +1,16 @@
+{% extends 'base_auth.html' %}
+{% load i18n %}
+{% load static %}
+{% block header %}
+    <link rel="stylesheet" href="{% static 'css/components/401-error.css' %}">
+{% endblock header %}
+{% block content %}
+    <div class="d-flex align-items-center justify-content-center vh-100 bg-light">
+        <div class="text-center p-4">
+            <img src="{% static 'images/401.svg' %}" alt="401 Unauthorized" class="img-fluid mb-4 error-img">
+            <h1 class="text-warning error-heading">{% trans "Unauthorized Access" %}</h1>
+            <p class="lead error-text">{% trans "You don't have permission to access this page." %}</p>
+{#            <a href="{% url 'user:user_dashboard' %}" class="btn back-to-home">{% trans "Go to Homepage" %}</a>#}
+        </div>
+    </div>
+{% endblock content %}

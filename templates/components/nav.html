@@ -1,0 +1,47 @@
+{% load i18n %}
+{% load static %}
+
+<div class="div-body">
+    <div class="dashboard-nav">
+        <div class="title-nav">{{ page_title }}</div>
+        <div class="dashboard-nav__info">
+            <div>
+                {% include 'components/language_switcher.html' %}
+            </div>
+            <div class="dashboard-nav__name">{{ request.user.first_name }}</div>
+            <div class="nav-profile" onclick="profileHover()">
+                <div class="dashboard-nav__img" id="dashboard-nav-profile-img">
+                    {% if request.user.is_authenticated %}
+                        {% if request.user.photo %}
+                            <img src="{{ request.user.photo.url }}" alt="Profile Image">
+                        {% else %}
+                            <img src="{% static 'images/default-avatar.jpg' %}" alt="Profile Image">
+                        {% endif %}
+                    {% endif %}
+                </div>
+                <div class="dropdown-arrow">
+                    <i class='bx bxs-down-arrow'></i>
+                </div>
+            </div>
+            <div class="profile-hover" id="profile-hover">
+                <div class="profile-hover__detail">
+                    <div class="profile-hover__img">
+                        {% if request.user.is_authenticated %}
+                            {% if request.user.photo %}
+                                <img src="{{ request.user.photo.url }}" alt="Profile Image">
+                            {% else %}
+                                <img src="{% static 'images/default-avatar.jpg' %}" alt="Profile Image">
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                    <div class="profile-hover__name">{{ request.user.full_name }}</div>
+                    <div class="profile-hover__email">{{ request.user.email }}</div>
+                </div>
+                <hr class="profile-hover-hr">
+                <div class="profile-hover__links">
+                    <a href="{% url 'user:logout' %}"><i class='bx bx-log-out'></i>{% trans "Log Out" %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
