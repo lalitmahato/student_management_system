@@ -1,0 +1,246 @@
+@import url('../base.css');
+
+.div-dashboard{
+    padding: 1rem;
+    background-color: var(--secondary-color);
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.card-heading {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 2rem 0 1rem;
+  color: #1e293b;
+  border-left: 5px solid #10b981;
+  padding-left: 1rem;
+}
+
+.card-heading1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 2rem 0 1rem;
+  color: #1e293b;
+  border-left: 5px solid darkorange;
+  padding-left: 1rem;
+}
+
+.card-heading2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 2rem 0 1rem;
+  color: #1e293b;
+  border-left: 5px solid blue;
+  padding-left: 1rem;
+}
+
+.detail-boxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.detail-boxes__box {
+  flex: 1 1 calc(25% - 1rem);
+  /*background: white;*/
+  border-radius: 10px;
+  padding: 1rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  transition: transform 0.2s;
+  min-width: 250px;
+}
+
+.detail-boxes__box:hover {
+    cursor: pointer;
+    transform: scaleY(1.05);
+}
+
+.three-dot {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    cursor: pointer;
+}
+
+.three-dot > i {
+    font-size: 1.5rem;
+    font-weight: 550;
+
+}
+
+.box-icon > i {
+    font-size: 3.2rem;
+}
+
+.total-no {
+    font-size: 2rem;
+    font-weight: 550;
+    color: var(--primary-color);
+}
+
+.box__text {
+    font-weight: 500;
+}
+
+.box__text > span {
+    color: var(--primary-color);
+    font-weight: 550;
+    font-size: 1.2rem;
+}
+
+/* Large Devices (Desktops - Small to Medium Screens) */
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+    .detail-boxes {
+        grid-template-columns: 32% 32% 32%;
+    }
+
+    .welcome-dashboard {
+        font-size: 1.4rem;
+    }
+
+    .total-no {
+        font-size: 1.85rem;
+    }
+
+    .box__text {
+        font-size: 0.95rem;
+    }
+
+    .box-icon > i {
+        font-size: 3rem;
+    }
+
+
+}
+
+/* Medium Devices (Tablets - Landscape) */
+@media screen and (min-width: 768px) and (max-width: 991px) {
+    .creator-dashboard {
+        left: 290px;
+        width: calc(100% - 290px);
+    }
+
+    .creator-dashboard.close {
+        left: 80px;
+        width: calc(100% - 80px);
+    }
+
+    .detail-boxes {
+        grid-template-columns:48.5% 48.5%;
+        gap: 3%;
+    }
+
+    .detail-boxes__box {
+        margin-bottom: 1vh;
+        padding: 1.1rem;
+    }
+
+    .welcome-dashboard {
+        font-size: 1.3rem;
+    }
+
+    .total-no {
+        font-size: 1.7rem;
+    }
+
+    .box__text {
+        font-size: 0.95rem;
+    }
+
+    .three-dot > i {
+        font-size: 1.4rem;
+    }
+
+    .box-icon > i {
+        font-size: 2.8rem;
+    }
+
+}
+
+
+/* Small Devices (Tablets - Portrait) */
+@media screen and (min-width: 577px) and (max-width: 767px) {
+
+    .creator-dashboard {
+        left: 270px;
+        width: calc(100% - 270px);
+    }
+
+    .creator-dashboard.close {
+        left: 70px;
+        width: calc(100% - 70px);
+    }
+
+    .detail-boxes__box {
+        margin-bottom: 1vh;
+        padding: 1rem;
+    }
+
+    .detail-boxes {
+        grid-template-columns:100%;
+    }
+
+    .welcome-dashboard {
+        font-size: 1.2rem;
+    }
+
+    .total-no {
+        font-size: 1.55rem;
+    }
+
+    .box__text {
+        font-size: 0.95rem;
+    }
+
+    .three-dot > i {
+        font-size: 1.3rem;
+    }
+
+    .box-icon > i {
+        font-size: 2.6rem;
+    }
+
+}
+
+/* Small Devices (Mobile Small - Portrait)*/
+@media screen and (max-width: 576px) {
+    .creator-dashboard {
+        left: 0px;
+        width: calc(100% - 0px);
+    }
+
+    .creator-dashboard.close {
+        left: 0px;
+        width: calc(100% - 0px);
+    }
+
+    .detail-boxes__box {
+        margin-bottom: 0.7vh;
+        padding: 1rem;
+    }
+
+    .detail-boxes {
+        grid-template-columns:100%;
+    }
+
+    .welcome-dashboard {
+        font-size: 1.1rem;
+    }
+
+    .total-no {
+        font-size: 1.4rem;
+    }
+
+    .box__text {
+        font-size: 0.9rem;
+    }
+
+    .three-dot > i {
+        font-size: 1.3rem;
+    }
+
+    .box-icon > i {
+        font-size: 2.5rem;
+    }
+}
