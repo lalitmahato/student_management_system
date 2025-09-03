@@ -1,0 +1,39 @@
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-body p-5">
+            <h2 class="mb-4">Edit Instructor</h2>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="row mb-4">
+                    <div class="col-4">
+                        {{ form.first_name }}
+                    </div>
+                    <div class="col-4">
+                        {{ form.middle_name }}
+                    </div>
+                    <div class="col-4">
+                        {{ form.last_name }}
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-6">
+                        {{ form.gender }}
+                    </div>
+                    <div class="col-6">
+                        {{ form.phone_number }}
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-12">
+                        {{ form.email }}
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col">
+                        <input type="submit" class="btn btn-primary" value="Submit">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
