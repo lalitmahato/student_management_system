@@ -15,7 +15,11 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path
-from students.views import (DashboardView, StudentListView, StudentCreateView, StudentUpdateView, StudentDeleteView)
+from students.views import (
+    DashboardView, StudentListView, StudentCreateView, StudentUpdateView, StudentDeleteView,
+    CourseListView, CourseCreateView, CourseUpdateView, CourseDeleteView, InstructorListView,
+    InstructorCreateView, InstructorUpdateView, InstructorDeleteView
+)
 
 app_name = 'students'
 urlpatterns = [
@@ -24,4 +28,12 @@ urlpatterns = [
     path("students/add/", StudentCreateView.as_view(), name="student_add"),
     path("students/<uuid:pk>/edit/", StudentUpdateView.as_view(), name="student_edit"),
     path("students/<uuid:pk>/delete/", StudentDeleteView.as_view(), name="student_delete"),
+    path("course/", CourseListView.as_view(), name="course_list"),
+    path("course/add/", CourseCreateView.as_view(), name="course_add"),
+    path("course/<uuid:pk>/edit/", CourseUpdateView.as_view(), name="course_edit"),
+    path("course/<uuid:pk>/delete/", CourseDeleteView.as_view(), name="course_delete"),
+    path("instructor/", InstructorListView.as_view(), name="instructor_list"),
+    path("instructor/add/", InstructorCreateView.as_view(), name="instructor_add"),
+    path("instructor/<uuid:pk>/edit/", InstructorUpdateView.as_view(), name="instructor_edit"),
+    path("instructor/<uuid:pk>/delete/", InstructorDeleteView.as_view(), name="instructor_delete"),
 ]
