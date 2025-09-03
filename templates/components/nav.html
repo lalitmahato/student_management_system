@@ -5,9 +5,6 @@
     <div class="dashboard-nav">
         <div class="title-nav">{{ page_title }}</div>
         <div class="dashboard-nav__info">
-{#            <div>#}
-{#                {% include 'components/language_switcher.html' %}#}
-{#            </div>#}
             <div class="dashboard-nav__name">{{ request.user.first_name }}</div>
             <div class="nav-profile" onclick="profileHover()">
                 <div class="dashboard-nav__img" id="dashboard-nav-profile-img">
@@ -30,7 +27,7 @@
                             {% if request.user.photo %}
                                 <img src="{{ request.user.photo.url }}" alt="Profile Image">
                             {% else %}
-                                <img src="{% static 'images/default-avatar.jpg' %}" alt="Profile Image">
+                                <img src="{% static 'img/default-avatar.jpg' %}" alt="Profile Image">
                             {% endif %}
                         {% endif %}
                     </div>

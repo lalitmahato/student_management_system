@@ -1,3 +1,19 @@
+.errorlist li {
+    color: red;
+}
+
+.message-success {
+    color: green;
+}
+
+.message-error {
+    color: red;
+}
+
+.message-info {
+    color: red;
+}
+
 .select-lang{
     position: absolute;
     top: 2rem;

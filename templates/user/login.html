@@ -15,12 +15,20 @@
                 <h2 class="form-title">{% trans "Login Here" %}</h2>
                 <form id="loginForm" method="post">
                     {% csrf_token %}
+                    {% if messages %}
+                        <ul class="messages">
+                            {% for message in messages %}
+                                <li {% if message.tags %}
+                                    class="message-{{ message.tags }}"{% endif %}>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
                     <div class="form-group">
-                        <label for="email">
+                        <label for="username">
                             <i class='bx bx-user input-icon-left'></i>{% trans "Email" %}
                         </label>
                         <div class="input-wrapper">
-                            <input type="email" placeholder="Email" id="email" name="email" required>
+                            <input type="email" placeholder="Email" id="id_username" name="username" required>
                         </div>
                     </div>
 
@@ -35,7 +43,7 @@
                         </div>
                     </div>
                     <div class="forgot-link">
-                        <a href="#">{% trans "Forgot Password" %} ?</a>
+                        <a href="{% url 'user:forgot_password' %}">{% trans "Forgot Password" %} ?</a>
                     </div>
                     <input type="submit" class="submit-btn" value="{% trans "Log In" %}">
                 </form>

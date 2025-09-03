@@ -1,12 +1,13 @@
 """User Related Models"""
-
+import logging
 import uuid
-
 from crum import get_current_user
 from django.conf import settings
-from django.contrib.auth.models import AbstractUser, UserManager
+from django.contrib.auth.models import AbstractUser, UserManager, AnonymousUser
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+
+logger = logging.getLogger(__name__)
 
 
 class CustomActiveManager(models.Manager):
@@ -57,7 +58,7 @@ class CreatorModifierInfo(models.Model):
 
     def save(self, *args, **kwargs):
         user = get_current_user()
-        if user:
+        if user and not isinstance(user, AnonymousUser):
             if self.created_at:
                 self.modifier = user
             else:
@@ -89,8 +90,13 @@ class User(AbstractUser, CreatorModifierInfo):
     middle_name = models.CharField(_("middle name"), max_length=150, null=True, blank=True)
     last_name = models.CharField(_("last name"), max_length=150)
     phone_number = models.CharField(_('phone_number'), null=True, max_length=20)
-    photo = models.ImageField(_('photo'), null=True, blank=True, upload_to='user/profile/image/%Y/%m/%d/',
-                              max_length=3000)
+    photo = models.ImageField(
+        _('photo'),
+        null=True,
+        blank=True,
+        upload_to='user/profile/image/%Y/%m/%d/',
+        max_length=3000
+    )
     date_of_birth = models.DateField(_('date_of_birth'), null=True)
     gender = models.CharField(_('gender'), null=True, choices=gender_select, max_length=200)
     USERNAME_FIELD = "email"
