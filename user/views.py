@@ -1,19 +1,22 @@
-from django.shortcuts import render, redirect
+import logging
+from django.urls import resolve
+from django.contrib import messages
+from django.shortcuts import redirect
 from django.contrib.auth import logout
 from django.views.generic import TemplateView
-from django.contrib.auth.views import LoginView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
+from django.contrib.auth.views import (
+    LoginView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView,
+    PasswordResetCompleteView
+)
 from django.contrib.auth.forms import AuthenticationForm
 from django.utils.decorators import method_decorator
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from user.decorators import unauthenticated_user
-from django.urls import resolve
-from django.contrib import messages
 from user.forms import CustomPasswordResetForm
 
+
 # Create your views here.
-
-
 @method_decorator(unauthenticated_user, name='dispatch')
 class CustomLoginView(LoginView):
     template_name = "user/login.html"
@@ -28,7 +31,8 @@ class CustomLoginView(LoginView):
             try:
                 current_url = resolve(next_url).app_name + ':' + resolve(next_url).url_name
                 return redirect(current_url).url
-            except Exception:
+            except Exception as e:
+                logging.error("Error resolving next URL: %s", e)
                 return redirect(self.default_redirect).url
         return redirect(self.default_redirect).url
 

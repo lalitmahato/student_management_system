@@ -1,13 +1,13 @@
+from celery import shared_task
 from django.utils.http import urlsafe_base64_encode
 from django.utils.encoding import force_bytes
-from celery import shared_task
-from django.core.mail import EmailMessage
+from django.template import loader
+from django.template.loader import render_to_string
+from django.core.mail import EmailMultiAlternatives, EmailMessage
+
 from core.settings import EMAIL_HOST_USER_FROM
 from user.models import User
 from user.token import account_activation_token
-from django.template.loader import render_to_string
-from django.template import loader
-from django.core.mail import EmailMultiAlternatives
 
 @shared_task
 def send_account_activation_email(user_id, protocol='http', domain="localhost:8000"):
@@ -36,20 +36,18 @@ def send_password_reset_email(
         to_email,
         html_email_template_name=None,
     ):
-        """
-        Send a django.core.mail.EmailMultiAlternatives to `to_email`.
-        """
-        subject = loader.render_to_string(subject_template_name, context)
-        # Email subject *must not* contain newlines
-        subject = "".join(subject.splitlines())
-        body = loader.render_to_string(email_template_name, context)
+    """Send a django.core.mail.EmailMultiAlternatives to `to_email`."""
+    subject = loader.render_to_string(subject_template_name, context)
+    # Email subject *must not* contain newlines
+    subject = "".join(subject.splitlines())
+    body = loader.render_to_string(email_template_name, context)
 
-        email_message = EmailMultiAlternatives(subject, body, from_email, [to_email])
-        if html_email_template_name is not None:
-            html_email = loader.render_to_string(html_email_template_name, context)
-            email_message.attach_alternative(html_email, "text/html")
+    email_message = EmailMultiAlternatives(subject, body, from_email, [to_email])
+    if html_email_template_name is not None:
+        html_email = loader.render_to_string(html_email_template_name, context)
+        email_message.attach_alternative(html_email, "text/html")
 
-        email_message.send()
+    email_message.send()
 
 
 

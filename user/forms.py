@@ -9,7 +9,6 @@ from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 from django.utils.translation import gettext_lazy as _
 from core.settings import EMAIL_HOST_USER_FROM
-from django.db.models import Q
 from user.models import User
 from user.tasks import send_password_reset_email
 
@@ -25,8 +24,8 @@ class UserRegistrationForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ['first_name', 'middle_name', 'last_name', 'phone_number', 'date_of_birth', 'gender', 'email',
-                  'password1', 'password2']
+        fields = ['first_name', 'middle_name', 'last_name', 'phone_number', 'date_of_birth',
+                  'gender', 'email', 'password1', 'password2']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -81,9 +80,7 @@ class CustomPasswordResetForm(forms.Form):
 
     def clean_email(self):
         email = self.cleaned_data['email']
-        try:
-            user = User.objects.get(email=email)
-        except User.DoesNotExist:
+        if not User.objects.filter(email=email).exists():
             raise ValidationError("User does not exist with this email.")
         return email
 
@@ -95,9 +92,9 @@ class CustomPasswordResetForm(forms.Form):
         resetting their password.
         """
         email_field_name = UserModel.get_email_field_name()
-        active_users = UserModel._default_manager.filter(
+        active_users = UserModel.objects.filter(
             **{
-                "%s__iexact" % email_field_name: email,
+                f"{email_field_name}__iexact": email,
                 "is_active": True,
             }
         )
