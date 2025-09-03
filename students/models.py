@@ -4,6 +4,7 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from user.models import CreatorModifierInfo
 
 # Create your models here.
+gender_select = (("Male", "Male"), ("Female", "Female"), ("Other", "Other"))
 
 class Metadata(CreatorModifierInfo):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=True, db_index=True)
@@ -16,12 +17,15 @@ class Metadata(CreatorModifierInfo):
 
 class Student(CreatorModifierInfo):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=True, db_index=True)
-    student_id = models.CharField(max_length=500, db_index=True, unique=True)
-    first_name = models.CharField(max_length=50)
+    student_id = models.CharField(max_length=500, db_index=True, unique=True, null=True)
+    first_name = models.CharField(max_length=50, null=True)
     middle_name = models.CharField(max_length=50, blank=True, null=True)
-    last_name = models.CharField(max_length=50)
-    email = models.EmailField(unique=True)
-    dob = models.DateField()
+    last_name = models.CharField(max_length=50, null=True)
+    email = models.EmailField(unique=True, null=True)
+    dob = models.DateField(null=True)
+    address = models.CharField(max_length=500, null=True)
+    gender = models.CharField(max_length=200, choices=gender_select, null=True)
+    phone_number = models.CharField(max_length=20, blank=True, null=True)
     metadata = models.ManyToManyField(
         Metadata, related_name="students", blank=True
     )
@@ -37,9 +41,9 @@ class Student(CreatorModifierInfo):
 
 class Course(CreatorModifierInfo):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=True, db_index=True)
-    course_code = models.CharField(max_length=20, unique=True)
-    name = models.CharField(max_length=100)
-    description = models.TextField(blank=True)
+    course_code = models.CharField(max_length=20, unique=True, null=True)
+    name = models.CharField(max_length=100, null=True)
+    description = models.TextField(blank=True, null=True)
     metadata = models.ManyToManyField(
         Metadata, related_name="courses", blank=True
     )
@@ -50,11 +54,12 @@ class Course(CreatorModifierInfo):
 
 class Instructor(CreatorModifierInfo):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=True, db_index=True)
-    first_name = models.CharField(max_length=50)
+    first_name = models.CharField(max_length=50, null=True)
     middle_name = models.CharField(max_length=50, blank=True, null=True)
-    last_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50, null=True)
     phone_number = models.CharField(max_length=20, blank=True, null=True)
-    email = models.EmailField(unique=True)
+    email = models.EmailField(unique=True, null=True)
+    gender = models.CharField(max_length=200, choices=gender_select, null=True)
     courses = models.ManyToManyField(Course, related_name="instructors", blank=True)
     metadata = models.ManyToManyField(
         Metadata, related_name="instructors", blank=True
