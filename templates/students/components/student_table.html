@@ -1,0 +1,38 @@
+{% load static %}
+{% load i18n %}
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th scope="col">SN</th>
+        <th scope="col">Student ID</th>
+        <th scope="col">Full Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Phone Number</th>
+        <th scope="col">Date of Birth</th>
+        <th scope="col">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for student in students %}
+        <tr>
+            <th scope="row">{{ forloop.counter0|add:page_obj.start_index }}</th>
+            <td>{{ student.student_id }}</td>
+            <td>{{ student.get_full_name }}</td>
+            <td>{{ student.email }}</td>
+            <td>{{ student.phone_number }}</td>
+            <td>{{ student.dob }}</td>
+            <td>
+                <a class="text-decoration-none" href="{% url 'students:student_edit' student.id %}">
+                    <i class="bx bx-edit"></i>
+                </a>
+                <a class="text-decoration-none" href="{% url 'students:student_delete' student.id %}">
+                    <i class='bx bx-trash'></i>
+                </a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% include 'components/pagination_component.html' with obj=students filter_fields=filter_fields %}
