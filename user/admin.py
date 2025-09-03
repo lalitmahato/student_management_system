@@ -26,8 +26,7 @@ class CustomUserAdmin(UserAdmin):
         }),
         ('Permissions', {
             'fields': (
-                'is_active', 'is_staff', 'is_superuser', 'staff_status',
-                'customer_status', 'groups','user_permissions', 'status'
+                'is_active', 'is_staff', 'is_superuser', 'groups','user_permissions', 'status'
             )
         }),
         ('Important dates', {
