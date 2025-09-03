@@ -1,0 +1,77 @@
+{% load i18n %}
+{% load static %}
+<div class="top-bar">
+    <div class="filter-tools">
+        <form>
+            <div class="row">
+                <div class="col-2"></div>
+                <div class="col-8">
+                    <input type="search" class="form-control" name="search" id="search" placeholder="Search here..." value="{{ search }}">
+                </div>
+                <div class="col-2">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </form>
+        <div class="right-tools">
+            <a class="content-header__add-btn text-decoration-none" href="{% url 'students:student_add' %}">
+                {% trans "Add Student" %}
+            </a>
+        </div>
+
+    </div>
+</div>
+
+{#<form>#}
+{#    <div class="collapse" id="filterCollapse">#}
+{#        <div class="filter-section">#}
+{#            <p class="filter__advance-text"></p>#}
+{#            <div class="filter-fields">#}
+{##}
+{#                <div class="filter__select">#}
+{#                    <input type="text" class="searchable-input nepali-date" name="start_date"#}
+{#                           placeholder="{% trans "Start Date" %}">#}
+{#                </div>#}
+{##}
+{#                <div class="filter__select">#}
+{#                    <input type="text" class="searchable-input nepali-date" name="end_date"#}
+{#                           placeholder="{% trans "End Date" %}">#}
+{#                </div>#}
+{##}
+{#                <div class="filter__select">#}
+{#                    <input type="text" class="searchable-input" name="startAmountRange"#}
+{#                           placeholder="{% trans "Start Amount Range" %}">#}
+{#                </div>#}
+{##}
+{#                <div class="filter__select">#}
+{#                    <input type="text" class="searchable-input" name="endAmountRange"#}
+{#                           placeholder="{% trans "End Amount Range" %}">#}
+{#                </div>#}
+{##}
+{#                <div class="filter__select">#}
+{#                    <select class="searchable-input" name="visitorType">#}
+{#                        <option value="">{% trans "Visitor Type" %}</option>#}
+{#                        <option value="hotel">{% trans "Hotel" %}</option>#}
+{#                        <option value="homestay">{% trans "HomeStay" %}</option>#}
+{#                        <option value="others">{% trans "Others" %}</option>#}
+{#                    </select>#}
+{#                </div>#}
+{##}
+{#            </div>#}
+{##}
+{#            <div class="filter__buttons">#}
+{#                <input type="reset" value="{% trans "Reset Filters" %}" class="filter-button button-reset">#}
+{#                <div>#}
+{#                    <button type="button"#}
+{#                            class="filter-button button-cancel"#}
+{#                            data-bs-toggle="collapse"#}
+{#                            data-bs-target="#filterCollapse"#}
+{#                            aria-expanded="false"#}
+{#                            aria-controls="filterCollapse">{% trans "Close" %}#}
+{#                    </button>#}
+{#                    <input type="submit" value="{% trans "Apply Filters" %}" class="filter-button button-submit">#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#</form>#}

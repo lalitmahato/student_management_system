@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block header %}
+    <link rel="stylesheet" href="{% static 'css/students/table_style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/students/filter_style.css' %}">
+{% endblock header %}
+
+{% block content %}
+    {% trans "Student Form" as translated_title %}
+    {% with page_title=translated_title %}
+        {% include 'components/nav.html' %}
+    {% endwith %}
+    <div class="jungle-entrance-table">
+        {% include 'students/components/add_student_form.html' %}
+    </div>
+{% endblock content %}
+
+{% block scripts %}
+
+{% endblock scripts %}

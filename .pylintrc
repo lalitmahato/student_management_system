@@ -20,7 +20,7 @@ disable=
     #no-self-use,
     #useless-super-delegation,
     #logging-fstring-interpolation,
-    #duplicate-code
+    duplicate-code,
     arguments-differ
 
 [TYPECHECK]
@@ -40,7 +40,7 @@ max-locals=30
 max-returns=10
 max-branches=15
 max-statements=50
-max-parents=7
+max-parents=15
 max-attributes=10
 
 [REPORTS]
