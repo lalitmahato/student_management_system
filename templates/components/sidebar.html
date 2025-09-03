@@ -12,7 +12,6 @@
     </div>
     <hr class="hr-line"/>
     <ul class="nav-links">
-
         <li class="hover-reveal {% if request.path == dashboard_url %} active_sidebar {% endif %}">
             <a href="{{ dashboard_url }}" class="d-flex align-items-center hoverable-link">
                 <i class='bx bxs-dashboard'></i>
@@ -22,105 +21,33 @@
                 <a href="{{ dashboard_url }}" class="hoverable-link">{% trans "Dashboard" %}</a>
             </div>
         </li>
-        <li class="hover-reveal collapsable-link {% if request.path == transactions or request.path == transaction_title or request.path == transaction_invoice %} active_sidebar {% endif %}">
-            <div class="icon-link d-flex justify-content-between align-items-center"
-                 data-bs-toggle="collapse" href="#transaction" role="button" aria-expanded="false"
-                 aria-controls="reports">
-                <a href="#" class="d-flex align-items-center padding hoverable-link">
-                    <i class='bx bxs-file'></i>
-                    <span class="link_name">{% trans "Transaction" %}</span>
-                </a>
-                <i class='bx bxs-chevron-down arrow'></i>
+        <li class="hover-reveal {% if request.path == jungle_entrance %} active_sidebar {% endif %}">
+            <a href="{{ student_list_url }}" class="hoverable-link"><i class='bx bxs-graduation'></i><span
+                    class="link_name">{% trans "Students" %}</span></a>
+            <div class="hover-label">
+                <a href="{{ student_list_url }}" class="hoverable-link">{% trans "Students" %}</a>
             </div>
-            <ul class="sub-menu collapse" id="transaction">
-                <li class="collapse-heading">{% trans "Transaction" %}</li>
-                <li><a href="{{ transactions }}">{% trans "Transactions" %}</a></li>
-                <li><a href="{{ transaction_title }}">{% trans "Transaction Title" %}</a></li>
-                <li><a href="{{ transaction_invoice }}">{% trans "Invoice" %}</a></li>
-            </ul>
         </li>
         <li class="hover-reveal {% if request.path == jungle_entrance %} active_sidebar {% endif %}">
-            <a href="{{ jungle_entrance }}" class="hoverable-link"><i class='bx bxs-tree'></i><span
-                    class="link_name">{% trans "Jungle Entrance" %}</span></a>
+            <a href="{{ course_list_url }}" class="hoverable-link"><i class='bx bx-book-open'></i><span
+                    class="link_name">{% trans "Course" %}</span></a>
             <div class="hover-label">
-                <a href="{{ jungle_entrance }}" class="hoverable-link">{% trans "Jungle Entrance" %}</a>
+                <a href="{{ course_list_url }}" class="hoverable-link">{% trans "Course" %}</a>
             </div>
         </li>
         <li class="hover-reveal {% if request.path == land_grass %} active_sidebar {% endif %}">
-            <a href="{{ land_grass }}" class="hoverable-link"><i class='bx bx-leaf'></i><span
-                    class="link_name">{% trans "Land Grass" %}</span></a>
+            <a href="{{ instructor_list_url }}" class="hoverable-link"><i class='bx bx-user' ></i><span
+                    class="link_name">{% trans "Instructor" %}</span></a>
             <div class="hover-label">
-                <a href="{{ land_grass }}" class="hoverable-link">{% trans "Land Grass" %}</a>
+                <a href="{{ instructor_list_url }}" class="hoverable-link">{% trans "Instructor" %}</a>
             </div>
         </li>
-        <li class="hover-reveal">
-            <a href="#" class="hoverable-link"><i class='bx bx-package'></i><span
-                    class="link_name">{% trans "Wood Management" %}</span></a>
+        <li class="hover-reveal {% if request.path == land_grass %} active_sidebar {% endif %}">
+            <a href="{{ user_list_url }}" class="hoverable-link"><i class='bx bx-user-circle'></i><span
+                    class="link_name">{% trans "Users" %}</span></a>
             <div class="hover-label">
-                <a href="#" class="hoverable-link">{% trans "Wood Management" %}</a>
+                <a href="{{ user_list_url }}" class="hoverable-link">{% trans "Users" %}</a>
             </div>
-        </li>
-        <li class="hover-reveal collapsable-link {% if request.path == vehicle or request.path == elephant %} active_sidebar {% endif %}">
-            <div class="icon-link d-flex justify-content-between align-items-center"
-                 data-bs-toggle="collapse" href="#registration" role="button" aria-expanded="false"
-                 aria-controls="reports">
-                <a href="#" class="d-flex align-items-center padding hoverable-link">
-                    <i class='bx bx-edit-alt'></i>
-                    <span class="link_name">{% trans "Registration" %}</span>
-                </a>
-                <i class='bx bxs-chevron-down arrow'></i>
-            </div>
-            <ul class="sub-menu collapse" id="registration">
-                <li class="collapse-heading">{% trans "Registration" %}</li>
-                <li><a href="{{ vehicle }}">{% trans "Vehicle" %}</a></li>
-                <li><a href="{{ elephant }}">{% trans "Elephant" %}</a></li>
-            </ul>
-        </li>
-        <li class="hover-reveal {% if request.path == members %} active_sidebar {% endif %}">
-            <a href="{{ members }}" class="hoverable-link"><i class='bx bx-group'></i><span
-                    class="link_name">{% trans "Members" %}</span></a>
-            <div class="hover-label">
-                <a href="{{ members }}" class="hoverable-link">{% trans "Members" %}</a>
-            </div>
-        </li>
-        <li class="hover-reveal {% if request.path == annual_work_plan or request.path == annual_work_plan_details %} active_sidebar {% endif %}">
-            <a href="{{ annual_work_plan }}" class="hoverable-link"><i class='bx bxs-calendar'></i><span
-                    class="link_name">{% trans "Annual Work Plan" %}</span></a>
-            <div class="hover-label">
-                <a href="{{ annual_work_plan }}" class="hoverable-link">{% trans "Annual Work Plan" %}</a>
-            </div>
-        </li>
-        <li class="hover-reveal collapsable-link {% if request.path == finance_report or request.path == work_plan_report %} active_sidebar {% endif %}">
-            <div class="icon-link d-flex justify-content-between align-items-center"
-                 data-bs-toggle="collapse" href="#reports" role="button" aria-expanded="false"
-                 aria-controls="reports">
-                <a href="#" class="d-flex align-items-center padding hoverable-link">
-                    <i class='bx bx-bar-chart'></i>
-                    <span class="link_name">{% trans "Reports" %}</span>
-                </a>
-                <i class='bx bxs-chevron-down arrow'></i>
-            </div>
-            <ul class="sub-menu collapse" id="reports">
-                <li class="collapse-heading">{% trans "Reports" %}</li>
-                <li><a href="{{ finance_report }}">{% trans "Finance Graph" %}</a></li>
-                <li><a href="{{ work_plan_report }}">{% trans "WorkPlan report" %}</a></li>
-            </ul>
-        </li>
-        <li class="hover-reveal collapsable-link ">
-            <div class="icon-link d-flex justify-content-between align-items-center"
-                 data-bs-toggle="collapse" href="#settings" role="button" aria-expanded="false"
-                 aria-controls="reports">
-                <a href="#" class="d-flex align-items-center padding hoverable-link">
-                    <i class='bx bx-cog'></i>
-                    <span class="link_name">{% trans "Settings" %}</span>
-                </a>
-                <i class='bx bxs-chevron-down arrow'></i>
-            </div>
-            <ul class="sub-menu collapse" id="settings">
-                <li class="collapse-heading">{% trans "Settings" %}</li>
-                <li><a href="#">{% trans "Change Password" %}</a></li>
-                <li><a href="#">{% trans "Contact Support" %}</a></li>
-            </ul>
         </li>
         <li class="hover-reveal">
             <a href="{% url 'user:logout' %}" class="hoverable-link"><i class='bx bx-log-out'></i><span
