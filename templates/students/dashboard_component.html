@@ -4,16 +4,16 @@
     <div class="card-heading1">
         {% trans "Summary" %}
     </div>
+
     <div class="detail-boxes" role="alert">
         <div class="detail-boxes__box alert alert-warning">
             <div class="three-dot">
                 <i class='bx bx-dots-vertical-rounded'></i>
-
             </div>
             <div class="box-icon">
-                <i class='bx bx-calendar-alt'></i>
+                <i class='bx bx-book-open'></i>
             </div>
-            <p class="total-no">5</p>
+            <p class="total-no">{{ course_count }}</p>
             <p class="box__text"><span>{% trans "Total Courses" %}</span></p>
         </div>
 
@@ -22,9 +22,9 @@
                 <i class='bx bx-dots-vertical-rounded'></i>
             </div>
             <div class="box-icon">
-                <i class='bx bx-trending-up'></i>
+                <i class='bx bxs-graduation'></i>
             </div>
-            <p class="total-no">5</p>
+            <p class="total-no">{{ student_count }}</p>
             <p class="box__text">
                 <span>{% trans "Total Students Counts" %}</span></p>
         </div>
@@ -34,9 +34,9 @@
                 <i class='bx bx-dots-vertical-rounded'></i>
             </div>
             <div class="box-icon">
-                <i class='bx bx-clipboard'></i>
+                <i class='bx bx-user' ></i>
             </div>
-            <p class="total-no">5</p>
+            <p class="total-no">{{ instructor_count }}</p>
             <p class="box__text"><span>{% trans "Total Instructor" %}</span></p>
         </div>
 
@@ -45,9 +45,9 @@
                 <i class='bx bx-dots-vertical-rounded'></i>
             </div>
             <div class="box-icon">
-                <i class='bx bx-check-circle'></i>
+                <i class='bx bx-user-circle'></i>
             </div>
-            <p class="total-no">5</p>
+            <p class="total-no">{{ user_count }}</p>
             <p class="box__text"><span>{% trans "Total Users" %}</span></p>
         </div>
     </div>
