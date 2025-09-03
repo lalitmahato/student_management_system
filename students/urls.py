@@ -19,5 +19,5 @@ from students.views import *
 
 app_name = 'students'
 urlpatterns = [
-    path('dashboard/', dashboard, name='dashboard'),
+    path('', dashboard, name='dashboard'),
 ]
