@@ -13,6 +13,8 @@ disable=
     missing-module-docstring,
     missing-class-docstring,
     missing-function-docstring,
+    broad-exception-caught,
+    too-many-positional-arguments,
     #too-few-public-methods,
     #no-member,  # Useful for dynamic Django fields
     #no-self-use,
@@ -27,12 +29,11 @@ generated-members=requests.*,objects,DoesNotExist,MultipleObjectsReturned
 
 [FORMAT]
 # Formatting rules
-max-line-length=100
+max-line-length=173
 indent-string='    '
 indent-after-paren=4
 
 [DESIGN]
-# Allow utility classes with only one method
 min-public-methods=1
 max-args=10
 max-locals=30

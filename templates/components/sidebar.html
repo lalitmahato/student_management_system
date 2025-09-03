@@ -1,36 +1,25 @@
 {% load static %}
 {% load i18n %}
-{% url 'user:user_dashboard' as dashboard %}
-{% url 'member:load_members' as members %}
-{% url 'user:logout' as logout %}
-{% url 'transaction:load_transactions' as transactions %}
-{% url 'transaction:load_transaction_title' as transaction_title %}
-{% url 'transaction_invoice:load_transaction_invoice' as transaction_invoice %}
-{% url 'jungle_entrance:load_jungle_entrance' as jungle_entrance %}
-{% url 'vehicle:load_vehicle' as vehicle %}
-{% url 'elephant:load_elephant' as elephant %}
-{% url 'land_grass:load_land_grass' as land_grass %}
-{% url 'annual_work_plan:load_annual_work_plan' as annual_work_plan %}
-{% url 'annual_work_plan:load_annual_work_plan_details' as annual_work_plan_details %}
-{% url 'report:load_finance_report' as finance_report %}
-{% url 'report:load_work_plan_report' as work_plan_report %}
+{% url "students:dashboard" as dashboard_url %}
+{% url 'user:logout' as logout_url %}
 
 <div class="sidebar" id="sidebar">
     <div class="logo-details text-center">
-        <a href="#">
-            <h4>Student Management System </h4>
+        <a href="{{ dashboard_url }}" class="anchor-logo-style">
+            <i class='bx  bxs-school logo_name'></i>
+            <i class='bx  bxs-school logo_name_small'></i>
         </a>
     </div>
     <hr class="hr-line"/>
     <ul class="nav-links">
 
-        <li class="hover-reveal {% if request.path == dashboard %} active_sidebar {% endif %}">
-            <a href="{{ dashboard }}" class="d-flex align-items-center hoverable-link">
+        <li class="hover-reveal {% if request.path == dashboard_url %} active_sidebar {% endif %}">
+            <a href="{{ dashboard_url }}" class="d-flex align-items-center hoverable-link">
                 <i class='bx bxs-dashboard'></i>
                 <span class="link_name">{% trans "Dashboard" %}</span>
             </a>
             <div class="hover-label">
-                <a href="{{ dashboard }}" class="hoverable-link">{% trans "Dashboard" %}</a>
+                <a href="{{ dashboard_url }}" class="hoverable-link">{% trans "Dashboard" %}</a>
             </div>
         </li>
         <li class="hover-reveal collapsable-link {% if request.path == transactions or request.path == transaction_title or request.path == transaction_invoice %} active_sidebar {% endif %}">
