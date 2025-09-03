@@ -24,15 +24,22 @@
 .logo-details {
   padding: 1rem;
 }
+.anchor-logo-style{
+    text-decoration: none;
+}
 .logo_name {
   width: 100%;
   display: block;
   margin: 0 auto;
+  color: #ffffff;
+  font-size: 65px;
 }
 .logo_name_small {
   width: 100%;
   display: none;
   margin: 0 auto;
+  color: #ffffff;
+  font-size: 20px;
 }
 .sidebar.small .logo_name {
   display: none;

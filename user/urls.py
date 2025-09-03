@@ -19,12 +19,13 @@ from user.views import *
 
 app_name = 'user'
 urlpatterns = [
-    path('login/', login_view, name='login'),
+    path('login/', CustomLoginView.as_view(), name='login'),
     path('logout/', logout_view, name="logout"),
-    path('error-401/', error_401, name='error_401'),
-    # path('forget/password/', forget_password, name='forget_password'),
-    # path('user-password-reset/', user_password_reset_message, name='user_password_reset_message'),
-    # path('user-registration/', user_registration_message, name='user_registration_message'),
-    # path('user-dashboard/', user_dashboard, name='user_dashboard'),
-    # path('reset/password/', reset_password, name='reset_password'),
+    path('unauthorized/', Error401View.as_view(), name='unauthorized'),
+    path('forgot-password/', PasswordReset.as_view(), name="forgot_password"),
+    path('reset-password/done/', PasswordResetDone.as_view(), name="password_reset_done"),
+    path('reset/<uidb64>/<token>/', PasswordResetConfirm.as_view(), name="password_reset_confirm"),
+    path('reset-password_complete/', PasswordResetComplete.as_view(), name="password_reset_complete"),
+    # path('activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/', activate_account,
+    #      name='account_activate'),
 ]

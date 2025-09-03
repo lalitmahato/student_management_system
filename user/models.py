@@ -56,12 +56,15 @@ class CreatorModifierInfo(models.Model):
         self.save()
 
     def save(self, *args, **kwargs):
-        user = get_current_user()
-        if user:
-            if self.created_at:
-                self.modifier = user
-            else:
-                self.creator = user
+        try:
+            user = get_current_user()
+            if user:
+                if self.created_at:
+                    self.modifier = user
+                else:
+                    self.creator = user
+        except Exception as e:
+            pass
         super().save(*args, **kwargs)
 
 
