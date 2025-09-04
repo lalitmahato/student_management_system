@@ -1,0 +1,38 @@
+{% load static %}
+{% load i18n %}
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th scope="col">SN</th>
+        <th scope="col">Course</th>
+{#        <th scope="col">Student</th>#}
+        <th scope="col">Enrolled Date Time</th>
+        <th scope="col">Grade</th>
+        <th scope="col">Score</th>
+        <th scope="col">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for enrollment in enrollments %}
+        <tr>
+            <th scope="row">{{ forloop.counter0|add:page_obj.start_index }}</th>
+            <td>{{ enrollment.course.name }}</td>
+            {#            <td>{{ enrollment.student.get_full_name }}</td>#}
+            <td>{{ enrollment.enrollment_datetime }}</td>
+            <td>{% if enrollment.grade %}{{ enrollment.grade }}{% else %}-{% endif %}</td>
+            <td>{% if enrollment.score %}{{ enrollment.score }}{% else %}-{% endif %}</td>
+            <td>
+                {% if enrollment.course %}
+                <a class="text-decoration-none" href="{% url 'students:course_detail' enrollment.course.id %}"
+                   target="_blank">
+                    <i class='bx bx-arrow-from-bottom'></i>
+                </a>
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% include 'components/pagination_component.html' with obj=students filter_fields=filter_fields %}

@@ -1,10 +1,11 @@
 {% load static %}
 {% load i18n %}
+{% load get_group %}
 {% url "students:dashboard" as dashboard_url %}
 {% url "students:student_list" as student_list_url %}
 {% url "students:course_list" as course_list_url %}
 {% url "students:instructor_list" as instructor_list_url %}
-{#{% url "students:student_delete" as student_delete_url %}#}
+{% url "students:enrolled_course_list" as enrolled_course_list_url %}
 {% url 'user:logout' as logout_url %}
 
 <div class="sidebar" id="sidebar">
@@ -25,34 +26,42 @@
                 <a href="{{ dashboard_url }}" class="hoverable-link">{% trans "Dashboard" %}</a>
             </div>
         </li>
-        <li class="hover-reveal {% if request.path == jungle_entrance %} active_sidebar {% endif %}">
-            <a href="{{ student_list_url }}" class="hoverable-link"><i class='bx bxs-graduation'></i><span
-                    class="link_name">{% trans "Students" %}</span></a>
-            <div class="hover-label">
-                <a href="{{ student_list_url }}" class="hoverable-link">{% trans "Students" %}</a>
-            </div>
-        </li>
-        <li class="hover-reveal {% if request.path == jungle_entrance %} active_sidebar {% endif %}">
-            <a href="{{ course_list_url }}" class="hoverable-link"><i class='bx bx-book-open'></i><span
-                    class="link_name">{% trans "Course" %}</span></a>
-            <div class="hover-label">
-                <a href="{{ course_list_url }}" class="hoverable-link">{% trans "Course" %}</a>
-            </div>
-        </li>
-        <li class="hover-reveal {% if request.path == land_grass %} active_sidebar {% endif %}">
-            <a href="{{ instructor_list_url }}" class="hoverable-link"><i class='bx bx-user' ></i><span
-                    class="link_name">{% trans "Instructor" %}</span></a>
-            <div class="hover-label">
-                <a href="{{ instructor_list_url }}" class="hoverable-link">{% trans "Instructor" %}</a>
-            </div>
-        </li>
-        <li class="hover-reveal {% if request.path == land_grass %} active_sidebar {% endif %}">
-            <a href="{{ user_list_url }}" class="hoverable-link"><i class='bx bx-user-circle'></i><span
-                    class="link_name">{% trans "Users" %}</span></a>
-            <div class="hover-label">
-                <a href="{{ user_list_url }}" class="hoverable-link">{% trans "Users" %}</a>
-            </div>
-        </li>
+        {% if request.user|has_group:"admin" %}
+            <li class="hover-reveal {% if request.path == student_list_url %} active_sidebar {% endif %}">
+                <a href="{{ student_list_url }}" class="hoverable-link"><i class='bx bxs-graduation'></i><span
+                        class="link_name">{% trans "Students" %}</span></a>
+                <div class="hover-label">
+                    <a href="{{ student_list_url }}" class="hoverable-link">{% trans "Students" %}</a>
+                </div>
+            </li>
+        {% endif %}
+        {% if request.user|has_group:"admin" or request.user|has_group:"instructor" %}
+            <li class="hover-reveal {% if request.path == course_list_url %} active_sidebar {% endif %}">
+                <a href="{{ course_list_url }}" class="hoverable-link"><i class='bx bx-book-open'></i><span
+                        class="link_name">{% trans "Course" %}</span></a>
+                <div class="hover-label">
+                    <a href="{{ course_list_url }}" class="hoverable-link">{% trans "Course" %}</a>
+                </div>
+            </li>
+        {% endif %}
+        {% if request.user|has_group:"admin" %}
+            <li class="hover-reveal {% if request.path == instructor_list_url %} active_sidebar {% endif %}">
+                <a href="{{ instructor_list_url }}" class="hoverable-link"><i class='bx bx-user'></i><span
+                        class="link_name">{% trans "Instructor" %}</span></a>
+                <div class="hover-label">
+                    <a href="{{ instructor_list_url }}" class="hoverable-link">{% trans "Instructor" %}</a>
+                </div>
+            </li>
+        {% endif %}
+        {% if request.user|has_group:"student" %}
+            <li class="hover-reveal {% if request.path == enrolled_course_list_url %} active_sidebar {% endif %}">
+                <a href="{{ enrolled_course_list_url }}" class="hoverable-link"><i class='bx bxs-book-content'></i><span
+                        class="link_name">{% trans "Enrolled Courses" %}</span></a>
+                <div class="hover-label">
+                    <a href="{{ enrolled_course_list_url }}" class="hoverable-link">{% trans "Enrolled Courses" %}</a>
+                </div>
+            </li>
+        {% endif %}
         <li class="hover-reveal">
             <a href="{% url 'user:logout' %}" class="hoverable-link"><i class='bx bx-log-out'></i><span
                     class="link_name">{% trans "Log Out" %}</span></a>

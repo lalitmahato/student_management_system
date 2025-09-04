@@ -10,8 +10,8 @@ class MetadataAdmin(admin.ModelAdmin):
 
 @admin.register(Student)
 class StudentAdmin(admin.ModelAdmin):
-    list_display = ('id', 'first_name', 'middle_name', 'last_name', 'email', 'dob', 'created_at', 'modified_at')
-    search_fields = ('id', 'first_name', 'middle_name', 'last_name', 'email')
+    list_display = ('id', 'student_id', 'first_name', 'middle_name', 'last_name', 'email', 'dob', 'created_at', 'modified_at')
+    search_fields = ('id', 'student_id', 'first_name', 'middle_name', 'last_name', 'email')
     list_filter = ('dob',)
     filter_horizontal = ('metadata',)
 
