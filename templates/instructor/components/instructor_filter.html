@@ -1,5 +1,6 @@
 {% load i18n %}
 {% load static %}
+{% load get_group %}
 <div class="top-bar">
     <div class="filter-tools">
         <form>
@@ -13,11 +14,12 @@
                 </div>
             </div>
         </form>
+        {% if request.user|has_group:"admin" %}
         <div class="right-tools">
             <a class="content-header__add-btn text-decoration-none" href="{% url 'students:instructor_add' %}">
                 {% trans "Add Instructor" %}
             </a>
         </div>
-
+        {% endif %}
     </div>
 </div>

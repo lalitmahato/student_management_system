@@ -5,19 +5,17 @@
 {% block header %}
     <link rel="stylesheet" href="{% static 'css/students/table_style.css' %}">
     <link rel="stylesheet" href="{% static 'css/students/filter_style.css' %}">
-    {{ form.media.css }}
 {% endblock header %}
 
 {% block content %}
-    {% trans "Course Form" as translated_title %}
+    {% trans "Marking Form" as translated_title %}
     {% with page_title=translated_title %}
         {% include 'components/nav.html' %}
     {% endwith %}
     <div class="jungle-entrance-table">
-        {% include 'courses/components/edit_course_form.html' %}
+        {% include 'enrollment/components/edit_course_marking_form.html' %}
     </div>
 {% endblock content %}
 
 {% block scripts %}
-    {{ form.media.js }}
 {% endblock scripts %}

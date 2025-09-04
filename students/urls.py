@@ -18,7 +18,9 @@ from django.urls import path
 from students.views import (
     DashboardView, StudentListView, StudentCreateView, StudentUpdateView, StudentDeleteView,
     CourseListView, CourseCreateView, CourseUpdateView, CourseDeleteView, InstructorListView,
-    InstructorCreateView, InstructorUpdateView, InstructorDeleteView, IndexPageView, CourseDetailView
+    InstructorCreateView, InstructorUpdateView, InstructorDeleteView, IndexPageView, CourseDetailView,
+    EnrolledCourseListView, EnrollToCourseView, CourseEnrolledStudentListView,
+    CourseEnrolledStudentMarkingView
 )
 
 app_name = 'students'
@@ -30,7 +32,13 @@ urlpatterns = [
     path("students/<uuid:pk>/edit/", StudentUpdateView.as_view(), name="student_edit"),
     path("students/<uuid:pk>/delete/", StudentDeleteView.as_view(), name="student_delete"),
     path("course/", CourseListView.as_view(), name="course_list"),
-    path("course/<uuid:pk>/", CourseDetailView.as_view(), name="course-detail"),
+    path("course/enroll-to/<uuid:pk>/", EnrollToCourseView.as_view(), name="enroll_to_course_view"),
+    path("course/enrolled/", EnrolledCourseListView.as_view(), name="enrolled_course_list"),
+    path("course/enrolled/student-list/<uuid:pk>/", CourseEnrolledStudentListView.as_view(),
+         name="course_enrolled_student_list"),
+    path("course/enrolled/update-student-mark/<uuid:pk>/", CourseEnrolledStudentMarkingView.as_view(),
+         name="course_enrolled_student_marking"),
+    path("course/<uuid:pk>/", CourseDetailView.as_view(), name="course_detail"),
     path("course/add/", CourseCreateView.as_view(), name="course_add"),
     path("course/<uuid:pk>/edit/", CourseUpdateView.as_view(), name="course_edit"),
     path("course/<uuid:pk>/delete/", CourseDeleteView.as_view(), name="course_delete"),

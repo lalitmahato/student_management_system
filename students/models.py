@@ -43,7 +43,7 @@ class Student(CreatorModifierInfo):
 
 class Course(CreatorModifierInfo):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=True, db_index=True)
-    course_code = models.CharField(max_length=20, unique=True, null=True)
+    course_code = models.CharField(max_length=100, unique=True, null=True)
     thumbnail_image = models.ImageField(upload_to='course_thumbnails/%Y/%m/%d', null=True, max_length=2000)
     name = models.CharField(max_length=100, null=True)
     short_description = models.TextField(null=True)
