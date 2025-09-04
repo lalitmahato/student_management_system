@@ -1,5 +1,7 @@
 # Student Management System
 
+Live Demo: https://student-management-system.lalitmahato.com.np/
+
 ## Overview
 The **Student Management System** is a web-based platform built with **Django (MVT architecture)**.  
 It provides role-based access for **Admins**, **Instructors**, and **Students**.  
