@@ -76,10 +76,13 @@
 
                             <hr>
 
-                            <div class="d-grid gap-2">
-                                <a href="#" class="btn btn-primary">Enroll Now
-                                </a>
-                            </div>
+                            <form method="POST" action="{% url 'students:enroll_to_course_view' course.id %}">
+                                {% csrf_token %}
+                                <div class="d-grid gap-2">
+                                    <input type="submit" class="btn btn-primary" value="Enroll Now">
+                                </div>
+                            </form>
+                            {% comment %}{% endcomment %}
                         </div>
                     </div>
 
@@ -104,7 +107,7 @@
                                             <div class="col-8">
                                                 <div class="card-body py-2">
                                                     <h5 class="card-title h6">{{ rec_course.name }}</h5>
-                                                    <a href="{% url 'students:course-detail' rec_course.id %}"
+                                                    <a href="{% url 'students:course_detail' rec_course.id %}"
                                                        class="stretched-link">View Course</a>
                                                 </div>
                                             </div>

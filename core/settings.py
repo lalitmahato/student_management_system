@@ -76,6 +76,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'students.apps.StudentsConfig',
+    'core',
     'django_celery_beat',
     'corsheaders',
     'ckeditor',

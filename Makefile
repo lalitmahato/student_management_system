@@ -1,3 +1,11 @@
+setup:
+	make build
+	make mm
+	make m
+	make fixture
+	make down
+	make up
+
 build:
 	sudo docker-compose -f docker-compose.yml up -d --build
 
@@ -57,3 +65,6 @@ loc:
 
 loc_c:
 	python3 manage.py compilemessages -l ne
+
+fixture:
+	docker exec -it student_management_system python manage.py loaddata groups
