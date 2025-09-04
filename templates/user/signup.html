@@ -1,0 +1,94 @@
+{% extends 'base_auth.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}Sign Up{% endblock title %}
+
+{% block header %}
+    <link rel="stylesheet" href="{% static 'css/user/signup.css' %}">
+{% endblock header %}
+
+{% block content %}
+    <div class="div-body">
+        <div class="container">
+            <div id="loginPage" class="page active">
+                <h2 class="form-title">{% trans "Sign Up Form" %}</h2>
+                <form id="loginForm" method="post">
+                    {% csrf_token %}
+                    {% if messages %}
+                        <ul class="messages">
+                            {% for message in messages %}
+                                <li {% if message.tags %}
+                                    class="message-{{ message.tags }}"{% endif %}>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                    <div class="row mb-4">
+                        <div class="col-4 form-group">
+                            {{ form.first_name }}
+                            {{ form.first_name.errors }}
+                        </div>
+                        <div class="col-4 form-group">
+                            {{ form.middle_name }}
+                            {{ form.middle_name.errors }}
+                        </div>
+                        <div class="col-4 form-group">
+                            {{ form.last_name }}
+                            {{ form.last_name.errors }}
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-6 form-group">
+                            {{ form.email }}
+                            {{ form.email.errors }}
+                        </div>
+                        <div class="col-6 form-group">
+                            {{ form.phone_number }}
+                            {{ form.phone_number.errors }}
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-6 form-group">
+                            {{ form.date_of_birth }}
+                            {{ form.date_of_birth.errors }}
+                        </div>
+                        <div class="col-6 form-group">
+                            {{ form.gender }}
+                            {{ form.gender.errors }}
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col form-group">
+                                {{ form.user_type }}
+                                {{ form.user_type.errors }}
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="input-wrapper">
+                            {{ form.password1 }}
+                            <i class='bx bx-show password-toggle'
+                               onclick="togglePasswordVisibility('id_password1', this)"></i>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="input-wrapper">
+                            {{ form.password2 }}
+                            <i class='bx bx-show password-toggle'
+                               onclick="togglePasswordVisibility('id_password2', this)"></i>
+                        </div>
+                    </div>
+                    <input type="submit" class="submit-btn" value="{% trans "Sign Up" %}">
+                </form>
+                <div class="back-link mt-4">
+                    <span>Already have an Account?</span>
+                    <a href="{% url 'user:login' %}" class="btn btn-primary">{% trans "Login" %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+{% block scripts %}
+    <script src="{% static 'js/password-visibility.js' %}"></script>
+{% endblock scripts %}

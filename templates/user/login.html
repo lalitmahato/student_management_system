@@ -47,6 +47,10 @@
                     </div>
                     <input type="submit" class="submit-btn" value="{% trans "Log In" %}">
                 </form>
+                <div class="back-link mt-4">
+                    <span>Don't Have an Account?</span>
+                    <a href="{% url 'user:signup' %}" class="btn btn-primary">{% trans "Sign Up" %}</a>
+                </div>
             </div>
         </div>
     </div>

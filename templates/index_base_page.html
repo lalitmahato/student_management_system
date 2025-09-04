@@ -33,12 +33,15 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link {% if request.path == index_page %}active{% endif %}" href="{{ index_page }}">Courses</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link btn btn-primary" href="{% url 'user:login' %}">Login</a>
-                </li>
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-primary" style="color: white" href="{% url 'students:dashboard' %}">Dashboard</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-primary" style="color: white" href="{% url 'user:login' %}">Login</a>
+                    </li>
+                {% endif %}
             </ul>
         </div>
     </div>
@@ -78,16 +81,18 @@
                 <h5>Contact</h5>
                 <ul class="list-unstyled">
                     <li><i class="fas fa-envelope me-2"></i> info@lalitmahato.com.np</li>
-                    <li><i class="fas fa-phone me-2"></i> +977 9865404842</li>
+                    <li><i class="fas fa-phone me-2"></i> +977 9865404842, 9819469599</li>
                     <li><i class="fas fa-map-marker-alt me-2"></i> Mahadevsthan, Koteshwor, Kathmandu</li>
                 </ul>
             </div>
             <div class="col-md-4">
                 <h5>Follow Me</h5>
                 <div class="social-links">
-                    <a href="https://github.com/lalitmahato/student_management_system" class="text-white me-2" target="_blank"><i
+                    <a href="https://github.com/lalitmahato/student_management_system" class="text-white me-2"
+                       target="_blank"><i
                             class="fab fa-github fa-lg"></i></a>
-                    <a href="https://www.linkedin.com/in/lalit-mahato-9ba4331a8/" class="text-white me-2" target="_blank"><i
+                    <a href="https://www.linkedin.com/in/lalit-mahato-9ba4331a8/" class="text-white me-2"
+                       target="_blank"><i
                             class="fab fa-linkedin fa-lg"></i></a>
                 </div>
             </div>
