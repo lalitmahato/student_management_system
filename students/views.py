@@ -305,7 +305,7 @@ class EnrolledCourseListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
         search_text = self.request.GET.get("search", "").strip()
 
         qs = (
-            Enrollment.objects.filter(student__user=self.request.user)
+            Enrollment.objects.filter(student__user=self.request.user, status=True)
             .select_related("course")
             .order_by("-created_at")
         )

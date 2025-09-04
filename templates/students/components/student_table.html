@@ -1,6 +1,6 @@
 {% load static %}
 {% load i18n %}
-
+{% load get_group %}
 <table class="table table-striped">
     <thead>
     <tr>
@@ -23,12 +23,16 @@
             <td>{{ student.phone_number }}</td>
             <td>{{ student.dob }}</td>
             <td>
-                <a class="text-decoration-none" href="{% url 'students:student_edit' student.id %}">
-                    <i class="bx bx-edit"></i>
-                </a>
-                <a class="text-decoration-none" href="{% url 'students:student_delete' student.id %}">
-                    <i class='bx bx-trash'></i>
-                </a>
+                {% if request.user|has_group:'admin' %}
+                    <a class="text-decoration-none btn btn-primary" href="{% url 'students:student_edit' student.id %}">
+                        <i class="bx bx-edit"></i>
+                    </a>
+                    <a class="text-decoration-none btn btn-danger" href="{% url 'students:student_delete' student.id %}">
+                        <i class='bx bx-trash'></i>
+                    </a>
+                {% else %}
+                    -
+                {% endif %}
             </td>
         </tr>
     {% endfor %}

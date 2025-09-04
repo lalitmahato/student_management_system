@@ -55,17 +55,17 @@ services:
       - redis
     volumes:
       - ./:/code/
-#  nginx:
-#    build: ./nginx
-#    container_name: student_management_system_nginx
-#    restart: always
-#    volumes:
-#      - ./static:/code/static
-#      - ./media:/code/media
-#    ports:
-#      - 8003:80
-#    depends_on:
-#      - web
+  nginx:
+    build: ./nginx
+    container_name: student_management_system_nginx
+    restart: always
+    volumes:
+      - ./static:/code/static
+      - ./media:/code/media
+    ports:
+      - 8003:80
+    depends_on:
+      - web
   db:
     image: postgres:17.6-alpine
     container_name: student_management_system_db

@@ -1,6 +1,6 @@
 {% load static %}
 {% load i18n %}
-
+{% load get_group %}
 <table class="table table-striped">
     <thead>
     <tr>
@@ -18,21 +18,25 @@
         <tr>
             <th scope="row">{{ forloop.counter0|add:page_obj.start_index }}</th>
             <td>{{ enrollment.course.name }}</td>
-                        <td>{{ enrollment.student.get_full_name }}</td>
+            <td>{{ enrollment.student.get_full_name }}</td>
             <td>{{ enrollment.enrollment_datetime }}</td>
             <td>{% if enrollment.grade %}{{ enrollment.grade }}{% else %}-{% endif %}</td>
             <td>{% if enrollment.score %}{{ enrollment.score }}{% else %}-{% endif %}</td>
             <td>
                 {% if enrollment.course %}
-                <a class="text-decoration-none btn btn-primary" href="{% url 'students:course_detail' enrollment.course.id %}"
-                   target="_blank">
-                    <i class='bx bx-arrow-from-bottom'></i>
-                </a>
+                    <a class="text-decoration-none btn btn-primary"
+                       href="{% url 'students:course_detail' enrollment.course.id %}"
+                       target="_blank">
+                        <i class='bx bx-arrow-from-bottom'></i>
+                    </a>
                 {% endif %}
-                <a class="text-decoration-none btn btn-warning" href="{% url 'students:course_enrolled_student_marking' enrollment.id %}"
-                   target="_blank">
-                    <i class='bx bx-edit-alt' ></i>
-                </a>
+                {% if request.user|has_group:'admin' or request.user|has_group:'instructor' %}
+                    <a class="text-decoration-none btn btn-warning"
+                       href="{% url 'students:course_enrolled_student_marking' enrollment.id %}"
+                       target="_blank">
+                        <i class='bx bx-edit-alt'></i>
+                    </a>
+                {% endif %}
             </td>
         </tr>
     {% endfor %}
