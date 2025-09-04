@@ -28,14 +28,47 @@ SECRET_KEY = config('SECRET_KEY', 'your-secret-key-here')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', cast=bool)
 
-ALLOWED_HOSTS = str(config('ALLOWED_HOSTS')).split(',')
-CSRF_TRUSTED_ORIGINS = str(config('CSRF_TRUSTED_ORIGINS')).split(',')
-CORS_ALLOWED_ORIGINS = str(config("ALLOWED_ORIGINS", "")).split(',')
+if not DEBUG:
+    ALLOWED_HOSTS = str(config('ALLOWED_HOSTS')).split(',')
+    CSRF_TRUSTED_ORIGINS = str(config('CSRF_TRUSTED_ORIGINS')).split(',')
+    CORS_ALLOWED_ORIGINS = str(config("ALLOWED_ORIGINS", "")).split(',')
+
+    # Language cookie security
+    LANGUAGE_COOKIE_SECURE = True
+    LANGUAGE_COOKIE_HTTPONLY = True
+    LANGUAGE_COOKIE_SAMESITE = 'Lax'
+    LANGUAGE_COOKIE_NAME = 'django_language'
+    LANGUAGE_COOKIE_AGE = 31536000  # 1 year
+    LANGUAGE_COOKIE_PATH = '/'
+
+    # Session and CSRF security
+    SESSION_COOKIE_SECURE = True
+    SESSION_COOKIE_HTTPONLY = True
+    SESSION_COOKIE_SAMESITE = 'Lax'
+    CSRF_COOKIE_SECURE = True
+    CSRF_COOKIE_HTTPONLY = True
+
+    # General security
+    SECURE_SSL_REDIRECT = True
+    SECURE_HSTS_SECONDS = 31536000
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+    X_FRAME_OPTIONS = 'DENY'
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    SECURE_BROWSER_XSS_FILTER = True
+    SECURE_REFERRER_POLICY = 'same-origin'
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SECURE_CROSS_ORIGIN_OPENER_POLICY = "same-origin"
+else:
+    ALLOWED_HOSTS = ['*']
+    CSRF_TRUSTED_ORIGINS = str(config('CSRF_TRUSTED_ORIGINS')).split(',')
+    CORS_ALLOWED_ORIGINS = str(config("ALLOWED_ORIGINS")).split(',')
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'django.contrib.sites',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -44,6 +77,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'students.apps.StudentsConfig',
     'django_celery_beat',
+    'corsheaders',
+    'ckeditor',
+    'ckeditor_uploader',
+    'crispy_forms',
+    'crispy_bootstrap5',
     'user',
 ]
 
@@ -160,6 +198,61 @@ STATICFILES_DIRS = [BASE_DIR / 'assets']
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
+# CKEditor Configuration
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+CKEDITOR_IMAGE_BACKEND = 'pillow'
+CKEDITOR_RESTRICT_BY_USER = True
+CKEDITOR_BROWSE_SHOW_DIRS = True
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Custom',
+        'toolbar_Custom': [
+            ['Bold', 'Italic', 'Underline'],
+            ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'JustifyLeft', 'JustifyCenter',
+             'JustifyRight', 'JustifyBlock'],
+            ['Link', 'Unlink'],
+            ['RemoveFormat', 'Source'],
+            ['Image', 'Table', 'HorizontalRule', 'SpecialChar'],
+            ['Styles', 'Format', 'Font', 'FontSize'],
+            ['TextColor', 'BGColor'],
+            ['Maximize', 'ShowBlocks'],
+            ['CodeSnippet'],
+        ],
+        'width': '100%',
+        'height': 300,
+        'extraPlugins': 'codesnippet',
+        'codeSnippet_theme': 'monokai_sublime',
+    },
+    'limited': {
+        'toolbar': 'Custom',
+        'toolbar_Custom': [
+            ['Format', 'Font', 'FontSize'],
+            ['Bold', 'Italic', 'Underline'],
+            ['TextColor', 'BGColor'],
+            ['NumberedList', 'BulletedList'],
+            ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', ],
+            ['Link', 'Unlink'],
+            ['RemoveFormat'],
+            ['Table', 'HorizontalRule', 'SpecialChar'],
+            ['Maximize'],
+        ],
+        'height': 200,
+        'width': '100%',
+    },
+    'advanced': {
+        'toolbar': 'Full',
+        'width': '100%',
+        'height': 400,
+        'extraPlugins': 'codesnippet,uploadimage,uploadwidget,widget,lineutils',
+        'codeSnippet_theme': 'monokai_sublime',
+    },
+}
+
+# Crispy Forms
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
@@ -182,4 +275,5 @@ EMAIL_HOST_USER_FROM = config('EMAIL_HOST_USER_FROM', default='')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
 EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=False, cast=bool)
 
+DJANGO_REST_PASSWORDRESET_IP_ADDRESS_HEADER = 'HTTP_X_FORWARDED_FOR'
 HTTP_USER_AGENT_HEADER = 'HTTP_USER_AGENT'
