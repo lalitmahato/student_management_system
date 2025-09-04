@@ -3,6 +3,7 @@ setup:
 	make mm
 	make m
 	make fixture
+	make cs
 	make down
 	make up
 
