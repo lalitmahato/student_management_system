@@ -46,8 +46,8 @@ class CreatorModifierInfo(models.Model):
     modified_at = models.DateTimeField('Modified Date Time', null=True, auto_now=True)
     status = models.BooleanField('deletion_status', default=True, null=True, blank=True)
 
-    # objects = CustomActiveManager()
-    # all_objects = CustomAllObjectsManager()
+    objects = CustomActiveManager()
+    all_objects = CustomAllObjectsManager()
 
     class Meta:
         abstract = True

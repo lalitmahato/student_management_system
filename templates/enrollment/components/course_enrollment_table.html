@@ -6,7 +6,7 @@
     <tr>
         <th scope="col">SN</th>
         <th scope="col">Course</th>
-{#        <th scope="col">Student</th>#}
+        <th scope="col">Student</th>
         <th scope="col">Enrolled Date Time</th>
         <th scope="col">Grade</th>
         <th scope="col">Score</th>
@@ -18,17 +18,21 @@
         <tr>
             <th scope="row">{{ forloop.counter0|add:page_obj.start_index }}</th>
             <td>{{ enrollment.course.name }}</td>
-            {#            <td>{{ enrollment.student.get_full_name }}</td>#}
+                        <td>{{ enrollment.student.get_full_name }}</td>
             <td>{{ enrollment.enrollment_datetime }}</td>
             <td>{% if enrollment.grade %}{{ enrollment.grade }}{% else %}-{% endif %}</td>
             <td>{% if enrollment.score %}{{ enrollment.score }}{% else %}-{% endif %}</td>
             <td>
                 {% if enrollment.course %}
-                <a class="text-decoration-none" href="{% url 'students:course_detail' enrollment.course.id %}"
+                <a class="text-decoration-none btn btn-primary" href="{% url 'students:course_detail' enrollment.course.id %}"
                    target="_blank">
                     <i class='bx bx-arrow-from-bottom'></i>
                 </a>
                 {% endif %}
+                <a class="text-decoration-none btn btn-warning" href="{% url 'students:course_enrolled_student_marking' enrollment.id %}"
+                   target="_blank">
+                    <i class='bx bx-edit-alt' ></i>
+                </a>
             </td>
         </tr>
     {% endfor %}

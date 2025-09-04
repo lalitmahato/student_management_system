@@ -1,6 +1,6 @@
 from django import forms
 
-from students.models import Student, Course, Instructor
+from students.models import Student, Course, Instructor, Enrollment
 
 
 # from django.core.exceptions import ValidationError
@@ -63,3 +63,16 @@ class InstructorForm(forms.ModelForm):
         self.fields['gender'].widget.attrs['class'] = "form-control"
         self.fields['email'].widget.attrs['class'] = "form-control"
         self.fields['email'].widget.attrs['placeholder'] = "Email Address"
+
+
+class EnrollmentMarkingForm(forms.ModelForm):
+    class Meta:
+        model = Enrollment
+        fields = ['grade', 'score']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['grade'].widget.attrs['class'] = "form-control"
+        self.fields['grade'].widget.attrs['placeholder'] = "Grade"
+        self.fields['score'].widget.attrs['class'] = "form-control"
+        self.fields['score'].widget.attrs['placeholder'] = "Score"
