@@ -1,7 +1,6 @@
 <!--Messages-->
 {% if messages %}
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    {{ messages }}
     {% for message in messages %}
         {% if message.tags == "success" %}
             <script>

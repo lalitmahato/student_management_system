@@ -83,6 +83,7 @@ class CustomUserManager(UserManager):
 
 class User(AbstractUser, CreatorModifierInfo):
     """Custom User Model"""
+    user_type_choices = (("Student", "Student"), ("Instructor", "Instructor"))
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=True, db_index=True)
     email = models.EmailField(null=True, unique=True)
     gender_select = (("Male", "Male"), ("Female", "Female"), ("Other", "Other"))
@@ -99,6 +100,7 @@ class User(AbstractUser, CreatorModifierInfo):
     )
     date_of_birth = models.DateField(_('date_of_birth'), null=True)
     gender = models.CharField(_('gender'), null=True, choices=gender_select, max_length=200)
+    user_type = models.CharField(max_length=20, choices=user_type_choices, default='student')
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ['first_name', 'last_name']
     objects = CustomUserManager()
