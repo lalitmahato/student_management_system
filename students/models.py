@@ -1,7 +1,8 @@
 import uuid
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
-from user.models import CreatorModifierInfo
+from ckeditor.fields import RichTextField
+from user.models import CreatorModifierInfo, User
 
 # Create your models here.
 gender_select = (("Male", "Male"), ("Female", "Female"), ("Other", "Other"))
@@ -17,6 +18,7 @@ class Metadata(CreatorModifierInfo):
 
 class Student(CreatorModifierInfo):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=True, db_index=True)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     student_id = models.CharField(max_length=500, db_index=True, unique=True, null=True)
     first_name = models.CharField(max_length=50, null=True)
     middle_name = models.CharField(max_length=50, blank=True, null=True)
@@ -42,8 +44,10 @@ class Student(CreatorModifierInfo):
 class Course(CreatorModifierInfo):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=True, db_index=True)
     course_code = models.CharField(max_length=20, unique=True, null=True)
+    thumbnail_image = models.ImageField(upload_to='course_thumbnails/%Y/%m/%d', null=True, max_length=2000)
     name = models.CharField(max_length=100, null=True)
-    description = models.TextField(blank=True, null=True)
+    short_description = models.TextField(null=True)
+    description = RichTextField(config_name='limited', null=True)
     metadata = models.ManyToManyField(
         Metadata, related_name="courses", blank=True
     )
@@ -54,6 +58,7 @@ class Course(CreatorModifierInfo):
 
 class Instructor(CreatorModifierInfo):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=True, db_index=True)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     first_name = models.CharField(max_length=50, null=True)
     middle_name = models.CharField(max_length=50, blank=True, null=True)
     last_name = models.CharField(max_length=50, null=True)

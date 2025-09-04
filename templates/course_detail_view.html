@@ -1,0 +1,117 @@
+{% extends 'index_base_page.html' %}
+{% load static %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <nav aria-label="breadcrumb" class="mb-4">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'students:index_page' %}">Courses</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{ course.name }}</li>
+            </ol>
+        </nav>
+        
+        <div class="row">
+            <div class="col-lg-8 mb-4 mb-lg-0">
+                <!-- Project Header -->
+                <h1 class="display-5 fw-bold mb-3">{{ course.name }}</h1>
+                <p class="lead text-muted mb-4">{{ course.short_description }}</p>
+                
+                <!-- Project Image -->
+                <div class="mb-4">
+                    {% if course.thumbnail_image %}
+                    <img src="{{ course.thumbnail_image.url }}" alt="{{ course.name }}" class="img-fluid rounded shadow-sm">
+                    {% else %}
+                        <img src="{% static 'img/default-featured-image.jpg' %}" alt="{{ course.name }}" class="img-fluid rounded shadow-sm">
+                    {% endif %}
+                </div>
+                
+                <!-- Project Content -->
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-body">
+                        <h2 class="h4 mb-3">Course Details</h2>
+                        <div class="mb-4">
+                            {{ course.description|safe }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4">
+                <!-- Project Details -->
+                <div class="card border-0 shadow-sm mb-4">
+                    <div class="card-body">
+                        <h2 class="h4 mb-3">Project Details</h2>
+                        <div class="mb-3">
+                            <h3 class="h6 text-muted">Name:</h3>
+                            <div class="d-flex flex-wrap gap-1">
+                                <span class="badge bg-secondary">{{ course.name }} ({{ course.course_code }})</span>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <h3 class="h6 text-muted">Instructor:</h3>
+                            <div class="d-flex flex-wrap gap-1">
+                                {% for instructor in course_instructors %}
+                                <span class="badge bg-secondary">{{ instructor.get_full_name }}</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <h3 class="h6 text-muted">Total Enrollments:</h3>
+                            <div class="d-flex flex-wrap gap-1">
+                                <span class="badge bg-secondary">{{ total_enrolled_students }}</span>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            {% for metadata in course_metadata %}
+                            <h3 class="h6 text-muted">{{ metadata.key }}</h3>
+                            <div class="d-flex flex-wrap gap-1">
+                                <span class="badge bg-secondary">{{ metadata.value }}</span>
+                            </div>
+                            {% endfor %}
+                        </div>
+
+                        <hr>
+                        
+                        <div class="d-grid gap-2">
+                            <a href="#" class="btn btn-primary">Enroll Now
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Related Courses -->
+                {% if recent_courses %}
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+                        <h2 class="h4 mb-3">Recent Courses</h2>
+                        
+                        {% for rec_course in recent_courses %}
+                        <div class="card mb-3 border-0 shadow-sm">
+                            <div class="row g-0">
+                                <div class="col-4">
+                                    {% if rec_course.thumbnail_image %}
+                                    <img src="{{ rec_course.thumbnail_image.url }}" class="img-fluid rounded-start" alt="{{ rec_course.name }}">
+                                        {% else %}
+                                    <img src="{% static 'img/default-featured-image.jpg' %}" class="img-fluid rounded-start" alt="{{ rec_course.name }}">
+                                    {% endif %}
+                                </div>
+                                <div class="col-8">
+                                    <div class="card-body py-2">
+                                        <h5 class="card-title h6">{{ rec_course.name }}</h5>
+                                        <a href="{% url 'students:course-detail' rec_course.id %}" class="stretched-link">View Course</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+

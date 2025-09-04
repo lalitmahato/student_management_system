@@ -18,17 +18,19 @@ from django.urls import path
 from students.views import (
     DashboardView, StudentListView, StudentCreateView, StudentUpdateView, StudentDeleteView,
     CourseListView, CourseCreateView, CourseUpdateView, CourseDeleteView, InstructorListView,
-    InstructorCreateView, InstructorUpdateView, InstructorDeleteView
+    InstructorCreateView, InstructorUpdateView, InstructorDeleteView, IndexPageView, CourseDetailView
 )
 
 app_name = 'students'
 urlpatterns = [
-    path('', DashboardView.as_view(), name='dashboard'),
+    path('', IndexPageView.as_view(), name='index_page'),
+    path('dashboard/', DashboardView.as_view(), name='dashboard'),
     path("students/", StudentListView.as_view(), name="student_list"),
     path("students/add/", StudentCreateView.as_view(), name="student_add"),
     path("students/<uuid:pk>/edit/", StudentUpdateView.as_view(), name="student_edit"),
     path("students/<uuid:pk>/delete/", StudentDeleteView.as_view(), name="student_delete"),
     path("course/", CourseListView.as_view(), name="course_list"),
+    path("course/<uuid:pk>/", CourseDetailView.as_view(), name="course-detail"),
     path("course/add/", CourseCreateView.as_view(), name="course_add"),
     path("course/<uuid:pk>/edit/", CourseUpdateView.as_view(), name="course_edit"),
     path("course/<uuid:pk>/delete/", CourseDeleteView.as_view(), name="course_delete"),

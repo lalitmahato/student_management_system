@@ -34,14 +34,15 @@ class StudentForm(forms.ModelForm):
 class CourseForm(forms.ModelForm):
     class Meta:
         model = Course
-        fields = ['name', 'description']
+        fields = ['name', 'short_description', 'description', 'thumbnail_image']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['name'].widget.attrs['class'] = "form-control"
         self.fields['name'].widget.attrs['placeholder'] = "Course Name"
-        self.fields['description'].widget.attrs['class'] = "form-control"
-        self.fields['description'].widget.attrs['placeholder'] = "Description"
+        self.fields['thumbnail_image'].widget.attrs['class'] = "form-control"
+        self.fields['short_description'].widget.attrs['class'] = "form-control"
+        self.fields['short_description'].widget.attrs['placeholder'] = "Short Description"
 
 
 class InstructorForm(forms.ModelForm):

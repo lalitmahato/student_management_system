@@ -12,3 +12,6 @@ flower==2.0.1
 django-redis==6.0.0
 pylint==3.3.8
 pylint-django==2.6.1
+django-ckeditor==6.7.3
+django-crispy-forms==2.4
+crispy-bootstrap5==2025.6
