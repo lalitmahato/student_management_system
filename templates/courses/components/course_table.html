@@ -25,10 +25,13 @@
             <td>{{ course.created_at }}</td>
             <td>{{ course.modified_at }}</td>
             <td>
-                <a class="text-decoration-none" href="{% url 'students:course_edit' course.id %}">
+                <a class="text-decoration-none btn btn-primary" href="{% url 'students:course_enrolled_student_list' course.id %}">
+                    <i class='bx bx-spreadsheet'></i>
+                </a>
+                <a class="text-decoration-none btn btn-warning" href="{% url 'students:course_edit' course.id %}">
                     <i class="bx bx-edit"></i>
                 </a>
-                <a class="text-decoration-none" href="{% url 'students:course_delete' course.id %}">
+                <a class="text-decoration-none btn btn-danger" href="{% url 'students:course_delete' course.id %}">
                     <i class='bx bx-trash'></i>
                 </a>
             </td>

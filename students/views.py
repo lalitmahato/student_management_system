@@ -1,13 +1,13 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.db.models import Count, Q, Prefetch, F
+from django.db.models import Count, Q, Prefetch
 from django.urls import reverse_lazy
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import redirect
 from django.views.generic import TemplateView, ListView, CreateView, UpdateView, DeleteView, DetailView
 from django.views import View
 from django.db import IntegrityError, transaction
 from django.contrib import messages
-from students.forms import StudentForm, CourseForm, InstructorForm
-from students.models import Course, Student, Instructor, Enrollment, Metadata
+from students.forms import StudentForm, CourseForm, InstructorForm, EnrollmentMarkingForm
+from students.models import Course, Student, Instructor, Enrollment
 from user.models import User
 
 
@@ -324,6 +324,59 @@ class EnrolledCourseListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
         context["search"] = search_text
         context["filter_fields"] = {"search": search_text}
         return context
+
+
+class CourseEnrolledStudentListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
+    model = Enrollment
+    template_name = "enrollment/enrolled_course_list.html"
+    context_object_name = "enrollments"
+    login_url = "user:login"
+    paginate_by = 10
+
+    def test_func(self):
+        return self.request.user.groups.filter(name__in=["admin", "instructor"]).exists()
+
+    def get_queryset(self):
+        search_text = self.request.GET.get("search", "").strip()
+        pk = self.kwargs.get("pk")
+        if self.request.user.groups.filter(name="instructor").exists():
+            query_q = Q(creator=self.request.user) & Q(course=pk)
+        else:
+            query_q = Q(course=pk)
+        qs = (
+            Enrollment.objects.filter(query_q)
+            .select_related("course")
+            .order_by("-created_at")
+        )
+
+        if search_text:
+            qs = qs.filter(
+                Q(course__course_code__icontains=search_text)
+                | Q(course__name__icontains=search_text)
+                | Q(course__description__icontains=search_text)
+            )
+        return qs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        search_text = self.request.GET.get("search", "").strip()
+        context["search"] = search_text
+        context["filter_fields"] = {"search": search_text}
+        return context
+
+
+class CourseEnrolledStudentMarkingView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Enrollment
+    form_class = EnrollmentMarkingForm
+    template_name = "enrollment/edit_enrollment_mark_form.html"
+    success_url = reverse_lazy("students:course_list")
+    login_url = "user:login"
+
+    def test_func(self):
+        if self.request.user.groups.filter(name="instructor").exists():
+            course_id = self.kwargs.get("pk")
+            return Course.objects.filter(id=course_id, creator=self.request.user).exists()
+        return self.request.user.groups.filter(name__in=["admin"]).exists()
 
 
 class EnrollToCourseView(LoginRequiredMixin, View):
