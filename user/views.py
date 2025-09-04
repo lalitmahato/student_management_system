@@ -1,7 +1,7 @@
 import logging
 
 from django.contrib import messages
-from django.contrib.auth import logout, get_user_model
+from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import (
@@ -99,7 +99,6 @@ class Error401View(TemplateView):
 
 
 def activate_account(request, uidb64, token):
-    User = get_user_model()
     try:
         uid = force_str(urlsafe_base64_decode(uidb64))
         user = User.objects.get(pk=uid)
@@ -110,6 +109,5 @@ def activate_account(request, uidb64, token):
         user.save()
         messages.success(request, 'Thank you for confirming your email. You can now log in to your account.')
         return redirect('user:login')
-    else:
-        messages.error(request, 'Invalid activation link.')
-        return redirect('user:login')
+    messages.error(request, 'Invalid activation link.')
+    return redirect('user:login')
