@@ -1,7 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db.models import Count, Q
+from django.db.models import Count, Q, Prefetch
 from django.urls import reverse_lazy
-from django.views.generic import TemplateView, ListView, CreateView, UpdateView, DeleteView
+from django.views.generic import TemplateView, ListView, CreateView, UpdateView, DeleteView, DetailView
 
 from students.forms import StudentForm, CourseForm, InstructorForm
 from students.models import Course, Student, Instructor
@@ -9,6 +9,14 @@ from user.models import User
 
 
 # Create your views here.
+class IndexPageView(ListView):
+    model = Course
+    template_name = "index.html"
+    context_object_name = "courses"
+    paginate_by = 9
+    ordering = ['-created_at']
+
+
 class DashboardView(LoginRequiredMixin, TemplateView):
     login_url = 'user:login'
     template_name = "dashboard.html"
@@ -129,6 +137,38 @@ class CourseUpdateView(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy("students:course_list")
     login_url = "user:login"
 
+
+class CourseDetailView(DetailView):
+    model = Course
+    template_name = "course_detail_view.html"
+    context_object_name = "course"
+
+    def get_queryset(self):
+        return (
+            Course.objects.annotate(enrollment_count=Count("enrollments", distinct=True))
+            .prefetch_related(
+                Prefetch(
+                    "instructors",
+                    queryset=Instructor.objects.only("id", "first_name", "middle_name", "last_name"),
+                ),
+                "metadata",
+            )
+        )
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        recent_courses = (
+            Course.objects.only("id", "name", "course_code", "thumbnail_image")
+            .exclude(id=self.object.id)
+            .order_by("-created_at")[:5]
+        )
+        context.update({
+            "recent_courses": recent_courses,
+            "course_instructors": self.object.instructors.all(),
+            "course_metadata": self.object.metadata.all(),
+            "total_enrolled_students": self.object.enrollment_count,
+        })
+        return context
 
 class CourseDeleteView(LoginRequiredMixin, DeleteView):
     model = Course

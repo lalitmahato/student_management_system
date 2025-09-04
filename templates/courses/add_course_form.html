@@ -5,6 +5,7 @@
 {% block header %}
     <link rel="stylesheet" href="{% static 'css/students/table_style.css' %}">
     <link rel="stylesheet" href="{% static 'css/students/filter_style.css' %}">
+    {{ form.media.css }}
 {% endblock header %}
 
 {% block content %}
@@ -18,5 +19,5 @@
 {% endblock content %}
 
 {% block scripts %}
-
+    {{ form.media.js }}
 {% endblock scripts %}

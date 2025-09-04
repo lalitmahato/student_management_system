@@ -48,7 +48,7 @@ class CustomLoginView(LoginView):
 @login_required(login_url='user:login')
 def logout_view(request):
     logout(request)
-    return redirect('user:login')
+    return redirect('students:index_page')
 
 
 class PasswordReset(PasswordResetView):

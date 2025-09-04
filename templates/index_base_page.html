@@ -1,0 +1,108 @@
+{% load static %}
+{% url "students:index_page" as index_page %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management System</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'img/logo/school_small.png' %}" type="image/x-icon">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/index/style.css' %}">
+
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+<!-- Header -->
+<header class="navbar navbar-expand-lg navbar-light bg-light sticky-top shadow-sm">
+    <div class="container">
+        <a class="navbar-brand" href="{{ index_page }}">
+            Student Management System
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link {% if request.path == index_page %}active{% endif %}" href="{{ index_page }}">Courses</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn btn-primary" href="{% url 'user:login' %}">Login</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</header>
+
+<!-- Main Content -->
+<main>
+    {% if messages %}
+        <div class="container mt-3">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% block content %}{% endblock %}
+</main>
+
+<!-- Footer -->
+<footer class="bg-dark text-white py-4 mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mb-3 mb-md-0">
+                <h5>Student Management System</h5>
+                <p class="">
+                    Our Student Management System is a web application designed to simplify academic record management
+                    for schools and institutions. The platform allows administrators to create and manage student
+                    profiles, track courses, monitor enrollments, and record performance. Instructors can be assigned to
+                    multiple courses, while metadata tagging enables flexible annotations across students, courses, and
+                    academic records.
+                </p>
+            </div>
+            <div class="col-md-4 mb-3 mb-md-0">
+                <h5>Contact</h5>
+                <ul class="list-unstyled">
+                    <li><i class="fas fa-envelope me-2"></i> info@lalitmahato.com.np</li>
+                    <li><i class="fas fa-phone me-2"></i> +977 9865404842</li>
+                    <li><i class="fas fa-map-marker-alt me-2"></i> Mahadevsthan, Koteshwor, Kathmandu</li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h5>Follow Me</h5>
+                <div class="social-links">
+                    <a href="https://github.com/lalitmahato/student_management_system" class="text-white me-2" target="_blank"><i
+                            class="fab fa-github fa-lg"></i></a>
+                    <a href="https://www.linkedin.com/in/lalit-mahato-9ba4331a8/" class="text-white me-2" target="_blank"><i
+                            class="fab fa-linkedin fa-lg"></i></a>
+                </div>
+            </div>
+        </div>
+        <hr class="my-3">
+        <div class="text-center">
+            <small>&copy; {% now "Y" %} {{ site_settings.site_title }}. All rights reserved.</small>
+        </div>
+    </div>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+{% block extra_js %}{% endblock %}
+</body>
+</html>
+

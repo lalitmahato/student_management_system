@@ -2,16 +2,30 @@
     <div class="card">
         <div class="card-body p-5">
             <h2 class="mb-4">Add Course</h2>
-            <form method="POST">
+            <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="row mb-4">
                     <div class="col">
                         {{ form.name }}
+                        {{ form.name.errors }}
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col">
+                        {{ form.thumbnail_image }}
+                        {{ form.thumbnail_image.errors }}
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col">
+                        {{ form.short_description }}
+                        {{ form.short_description.errors }}
                     </div>
                 </div>
                 <div class="row mb-4">
                     <div class="col">
                         {{ form.description }}
+                        {{ form.description.errors }}
                     </div>
                 </div>
                 <div class="row mb-4">
