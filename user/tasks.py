@@ -13,7 +13,7 @@ from user.token import account_activation_token
 def send_account_activation_email(user_id, protocol='http', domain="localhost:8000"):
     user = User.objects.filter(id=user_id).first()
     if user:
-        mail_subject = 'Activate Your Account Now! (Thulung Dudhkoshi RM Employment Centre Portal)'
+        mail_subject = 'Activate Your Account Now! (Student Management System)'
         body_message = render_to_string('email/account_activation_email.html', {
             'protocol': protocol,
             'user': user,

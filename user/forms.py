@@ -10,7 +10,7 @@ from django.utils.http import urlsafe_base64_encode
 from django.utils.translation import gettext_lazy as _
 from core.settings import EMAIL_HOST_USER_FROM
 from user.models import User
-from user.tasks import send_password_reset_email
+from user.tasks import send_password_reset_email, send_account_activation_email
 
 UserModel = get_user_model()
 
@@ -24,10 +24,11 @@ class UserRegistrationForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ['first_name', 'middle_name', 'last_name', 'phone_number', 'date_of_birth',
+        fields = ['first_name', 'middle_name', 'last_name', 'phone_number', 'date_of_birth', 'user_type',
                   'gender', 'email', 'password1', 'password2']
 
     def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request", None)
         super().__init__(*args, **kwargs)
         self.fields['first_name'].widget.attrs['class'] = "form-control"
         self.fields['first_name'].widget.attrs['placeholder'] = "First Name"
@@ -39,6 +40,7 @@ class UserRegistrationForm(forms.ModelForm):
         self.fields['phone_number'].widget.attrs['placeholder'] = "Phone Number"
         self.fields['date_of_birth'].widget.attrs['class'] = "form-control"
         self.fields['gender'].widget.attrs['class'] = "form-control"
+        self.fields['user_type'].widget.attrs['class'] = "form-control"
         self.fields['email'].widget.attrs['class'] = "form-control"
         self.fields['email'].widget.attrs['placeholder'] = "Email Address"
         self.fields['password1'].widget.attrs['class'] = "form-control"
@@ -68,6 +70,9 @@ class UserRegistrationForm(forms.ModelForm):
             user.is_active = False
             user.username = user.email
             user.save()
+            request = self.request
+            current_site = get_current_site(self.request)
+            send_account_activation_email.apply_async(args=[user.id, request.scheme, current_site.domain])
         return user
 
 
