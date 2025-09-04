@@ -1,7 +1,9 @@
+import datetime
+
 from django.db import transaction
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-import datetime
+
 from students.models import Course, Instructor
 
 
@@ -35,6 +37,3 @@ def course_post_save(sender, instance, created, **kwargs):
                     gender=instance.creator.gender,
                 )
                 new_instructor.courses.add(instance)
-
-
-

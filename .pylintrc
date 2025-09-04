@@ -16,6 +16,9 @@ disable=
     broad-exception-caught,
     too-many-positional-arguments,
     anomalous-backslash-in-string,
+    unused-import,
+    unused-argument,
+    unused-variable,
     #too-few-public-methods,
     #no-member,  # Useful for dynamic Django fields
     #no-self-use,

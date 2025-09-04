@@ -1,8 +1,8 @@
+import datetime
 from django.db import transaction
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.contrib.auth.models import Group
-import datetime
 from user.models import User
 from students.models import Student, Instructor
 
@@ -45,4 +45,3 @@ def user_post_save(sender, instance, created, **kwargs):
                 gender=instance.gender,
                 phone_number=instance.phone_number,
             )
-

@@ -14,7 +14,6 @@ def file_type(file_name):
     extension = file_name.split('.')[-1]
     if extension in image:
         return 'image'
-    elif extension in document:
+    if extension in document:
         return 'document'
-    else:
-        return 'other'
+    return 'other'
