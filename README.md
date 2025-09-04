@@ -1,12 +1,111 @@
 # Student Management System
 
-This is a student management system built using Django and Docker.
+## Overview
+The **Student Management System** is a web-based platform built with **Django (MVT architecture)**.  
+It provides role-based access for **Admins**, **Instructors**, and **Students**.  
+The system uses **PostgreSQL** as the primary database and **Celery + Redis** for handling asynchronous tasks like email notifications.
 
-## ERD Diagram
-The ERD diagram for the student management system is available at the following URL: [lucid.app](https://lucid.app/lucidchart/fb80dfd6-628b-4305-8fd3-677c2dbc7dda/edit?viewport_loc=-715%2C121%2C2217%2C1095%2C0_0&invitationId=inv_4928a608-8e4c-4b95-b7c0-18a5a67223df)
+---
 
-## Setup Process
-### Create ```.env``` file and add the following environment variables:
+## Users and Roles
+
+### Student
+- Register and log in with Django authentication.
+- View and enroll in courses.
+- Receive confirmation/activation emails notifications (via Celery).
+- View grades given by the instructor.
+
+### Instructor
+- Create, edit, update, and delete courses.
+- Manage course details and content.
+- Assign grades/scores to enrolled students.
+- Receive notifications of student enrollments.
+
+### Admin
+- Full CRUD access to **students, instructors, courses, enrollments, and metadata**.
+- Override/update any records.
+- Manage advanced configurations.
+
+---
+
+## Features
+- **Authentication & Authorization** with Django’s built-in auth system.
+- **Student Profile Management** (CRUD operations, unique email validation).
+- **Course Management** (unique course codes, instructor-course relations).
+- **Enrollment Tracking** with grades/scores and duplicate prevention.
+- **Metadata System** (attach key-value annotations to students, courses, instructors, and enrollments).
+- **Async Email Notifications** using Celery + Redis.
+- **PostgreSQL Database** with strong relational integrity.
+- **Frontend UI** built with Django templates, HTML, CSS, and jQuery, bootstrap.
+- **Soft Delete** for records.
+- **Celery Flower** for monitoring Celery tasks.
+- **Docker** for containerization.
+- **Makefile** for running commands.
+- **Code Quality Check** check using `pylint`.
+
+---
+
+## Tech Stack
+
+| Component        | Technology                                 |
+|------------------|--------------------------------------------|
+| Backend          | Django (Python)                            |
+| Database         | PostgreSQL                                 |
+| Message Broker   | Redis                                      |
+| Async Tasks      | Celery                                     |
+| Auth             | Django Authentication                      |
+| Frontend         | Django Templates, HTML, CSS, JS, Bootstrap |
+| Containerization | Docker                                     |
+
+---
+
+## System Workflow
+
+1. **User Authentication**  
+   - Student, Instructor, Admin login with Django Auth.
+
+2. **Student Actions**  
+   - Browse courses → Enroll → View grades.
+
+3. **Instructor Actions**  
+   - Create/Edit course → Assign grades.
+
+4. **Admin Actions**  
+   - Manage **all entities** with full control.
+
+---
+
+## Advantages
+- Clear separation of roles (Admin, Instructor, Student).
+- Reliable background processing with **Celery + Redis**.
+- Strong relational structure with PostgreSQL.
+- Flexible metadata model for advanced use cases (Eg: page view).
+- Django’s built-in **security and authentication**.
+
+---
+
+# Setup Process
+## Setup Instructions
+
+1. **Clone Repository**
+```
+https://github.com/lalitmahato/student_management_system.git
+```
+```
+cd student_management_system
+```
+
+The setup process for this project is pretty simple because it is dockerized. The only thing required is docker.
+The project is using `Makefile` to run the commands, so I recommend to use `Makefile` to run the commands. If your
+device don't have `Makefile` installed then you can install it by using following command:
+```
+pip install makefile
+```
+The given command will install the `Makefile` on your device. If the `Makefile` does not work then you can enter command 
+manually. To setup the project in your device. First create a `.env` file and add the following environment variables:
+
+### Create `.env` file and add the following environment variables:
+
 ```dotenv
 SECRET_KEY=secret_key
 DEBUG=True
@@ -43,49 +142,47 @@ PAGE_SIZE=20
 BROKER_URL=redis://redis:6379/0
 CELERY_RESULT_BACKEND=redis://redis:6379/0
 ```
+
 Change the values of the environment variables according to your setup.
 
-### To run the project:
-1. **Build the Docker containers**:
-    If you are using ```Makefile``` then run the following command:
-    ```bash
-    make build
-    ```
-   **OR** build by using following command:
-    ```bash
-    docker-compose -f docker-compose.yml up -d --build
-    ```
-2. **Once the project is successfully build you can use following commands to run the project**:
-   - **To run the**:
-     If you are using ```Makefile``` then run the following command:
-     ```bash
-     make up
-     ```
-     **OR**
-     ```bash
-     docker-compose -f docker-compose.yml up -d
-     ```
-   - **To Stop The Project**:
-     If you are using ```Makefile``` then run the following command:
-     ```bash
-     make down
-     ```
-     **OR**
-     ```bash
-     docker-compose -f docker-compose.yml down
-     ```
-   - **To Run Migration**:
-     If you are using ```Makefile``` then run the following command:
-     ```bash
-     make mm
-     ```
-     ```bash
-     make m
-     ```
-     **OR**
-     ```bash
-     docker-compose -f docker-compose.yml python manage.py makemigrations
-     ```
-     ```bash
-     docker-compose -f docker-compose.yml python manage.py migrate
-     ```
+*Note: If you make the `DEBUG=False` the system configuration enforces to secure connection(SSL), this setup might not work on local environment.
+So make sure to make `DEBUG=True` if you are working on local environment.*
+
+### Project Setup With `Makefile`
+To run the project you need to have docker installed on your device. Also it is better to have `Makefile` installed on your device.
+
+If you are using `Makefile` then you don't need to run multiple commands. To run the project using `Makefile` you can use following commands:
+```
+make setup
+```
+The above command will build the docker image, run migrations, seed data to the database from fixture file, collect static files and restart the project.
+
+### Project Setup Without `Makefile`
+If you are not using `Makefile` then you need to run multiple commands.
+```
+docker-compose -f docker-compose.yml up -d --build
+```
+The above command will build the docker image. After running the above command you need to run the following commands:
+```
+docker-compose -f docker-compose.yml python manage.py makemigrations
+```
+```
+docker-compose -f docker-compose.yml python manage.py migrate
+```
+The given commands will run migrations. After running the above commands you need to seed the data to the database from fixture file. To do that run the following command:
+```
+docker exec -it student_management_system python manage.py loaddata groups
+```
+The above command will seed the data to the database from fixture file. After running the above command you need to collect static files. To do that run the following command:
+```
+docker exec -it student_management_system python manage.py collectstatic --noinput
+```
+After running the above command you need to restart the project. To do that run the following command:
+```
+docker-compose -f docker-compose.yml down
+```
+```
+docker-compose -f docker-compose.yml up -d
+```
+The first command will stop the project and the second command will start the project. This way you can run the project without using `Makefile`.
+
