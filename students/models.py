@@ -2,7 +2,6 @@ import uuid
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from ckeditor.fields import RichTextField
-from ckeditor_uploader.fields import RichTextUploadingField
 from user.models import CreatorModifierInfo, User
 
 # Create your models here.
