@@ -1,6 +1,12 @@
 # Student Management System
 
 Live Demo: https://student-management-system.lalitmahato.com.np/
+*User Credential* for admin user:
+```
+Email: info@lalitmahato.com.np
+Password: P@ssw0rd@##!!
+```
+*Note: Other types of users can register and login using their own email from the system.*
 
 ## Overview
 The **Student Management System** is a web-based platform built with **Django (MVT architecture)**.  
@@ -27,6 +33,11 @@ The system uses **PostgreSQL** as the primary database and **Celery + Redis** fo
 - Full CRUD access to **students, instructors, courses, enrollments, and metadata**.
 - Override/update any records.
 - Manage advanced configurations.
+
+**Note**: *When the admin creates a new student or instructor, they cannot log in to the system by default.
+This is because each student and instructor must be linked to a corresponding User account, and this association
+is not automatically established during the creation process. Without this user linkage, authentication is
+not possible for the newly added records.*
 
 ---
 
@@ -159,6 +170,12 @@ make setup
 ```
 The above command will build the docker image, run migrations, seed data to the database from fixture file, collect static files and restart the project.
 
+The above steps are enough to run the project. But if you also want to create super user to login to the system then you can use following command:
+```
+make csu
+```
+The above command will create super admin user to login to the system.
+
 ### Project Setup Without `Makefile`
 If you are not using `Makefile` then you need to run multiple commands.
 ```
@@ -188,3 +205,9 @@ docker-compose -f docker-compose.yml up -d
 ```
 The first command will stop the project and the second command will start the project. This way you can run the project without using `Makefile`.
 
+if you also want to create super user to login to the system then you can use following command:
+```
+docker exec -it student_management_system python manage.py createsuperuser
+```
+**Note:** *Initially the user is superuser but it is not `admin` user for the system. To make the user `admin` user
+you need to login to the system and go to the admin panel and assign `admin` group to the user.*
